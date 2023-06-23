@@ -1,0 +1,98 @@
+﻿<Window x:Class="ATBM_Seminar.Views.TruongPhongView.DetailEmp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATBM_Seminar.Views.TruongPhongView"
+        mc:Ignorable="d"
+        Title="DetailEmp" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None">
+    <Border CornerRadius="30" BorderBrush="Black" BorderThickness="5" Background="#EFF2F7" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="30" Background="#623ED0" Grid.Row="0">
+                <Label Foreground="White" Content="Information employee"  HorizontalAlignment="Center" FontWeight="Bold" FontSize="30" />
+            </Border>
+            <Border  Grid.Row="1" Margin="20" CornerRadius="30" BorderThickness="2" BorderBrush="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="_ID:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <TextBox IsEnabled="False" Grid.Row="0" Grid.Column="1" x:Name="IdTextBox" FontSize="12" VerticalAlignment="Center"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="_Name:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <TextBox IsEnabled="False" Grid.Row="1" Grid.Column="1" x:Name="nameTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+
+                        <Label  Grid.Row="2" Grid.Column="0" Content="_Sex:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <TextBox IsEnabled="False" Grid.Row="2" Grid.Column="1" x:Name="sexTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+
+                        <Label Grid.Row="3" Grid.Column="0" Content="_Birthday:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+                        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="1" x:Name="birthdayTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="_Number phone:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBox IsEnabled="False" Grid.Row="0" Grid.Column="1" x:Name="phoneTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="_Address:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBox IsEnabled="False" Grid.Row="1" Grid.Column="1" x:Name="addrTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="_Role:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBox IsEnabled="False" Grid.Row="2" Grid.Column="1" x:Name="roleTextBox" FontSize="12" VerticalAlignment="Center"></TextBox>
+
+
+                        <Label Grid.Row="3" Grid.Column="0" Content="_Department:" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBox IsEnabled="False" Grid.Row="3" Grid.Column="1" x:Name="departmentTextBox"  FontSize="12" VerticalAlignment="Center"></TextBox>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Button HorizontalAlignment="Left" Width="80" Grid.Row="2" Padding="1 0 0 5" Foreground="White" Margin="20 0 0 20" Content="EXIT" Height="40" Click="exitBtn" FontSize="15" FontWeight="Bold">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="20" BorderBrush="Black" BorderThickness="2" Background="#623ED0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#7B5CD6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
+
+</Window>

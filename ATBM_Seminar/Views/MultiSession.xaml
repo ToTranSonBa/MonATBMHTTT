@@ -1,0 +1,35 @@
+﻿<Window x:Class="ATBM_Seminar.Views.MultiSession"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATBM_Seminar.Views"
+        mc:Ignorable="d"
+        Title="MultiSession" Height="720" Width="1080"
+        Background="Transparent" WindowStyle="None">
+    <Border CornerRadius="30" Background="#EFF2F7">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Black" FontSize="30" Grid.Row="0" Grid.Column="1" Foreground="Black">_Chọn vai trò hệ thống</Label>
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0" FontWeight="Bold" FontSize="20" x:Name="listSession" Width="500" Height="50"/>
+                <Button Grid.Row="1" Background="BlueViolet" Foreground="White" FontWeight="Bold" FontSize="15"
+                        Height="60" Width="500" x:Name="btnLogin" Content="_SUMMIT" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left" Click="BtnSubmitMultiSession_Click"/>
+
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

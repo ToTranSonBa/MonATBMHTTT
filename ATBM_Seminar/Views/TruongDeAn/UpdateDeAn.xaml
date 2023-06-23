@@ -1,0 +1,65 @@
+﻿<Window x:Class="ATBM_Seminar.Views.TruongDeAn.UpdateDeAn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATBM_Seminar.Views.TruongDeAn"
+       mc:Ignorable="d" Height="500" Width="800"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None">
+
+    <!-- Define UI elements here, and use DataBinding to bind to properties and commands in the ViewModel -->
+
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
+
+    <Border CornerRadius="30" Background="#EFF2F7" BorderBrush="#623ED0" BorderThickness="6">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border CornerRadius="0 50 0 30">
+                <DockPanel>
+
+                    <!--Menu Titles-->
+                    <TextBlock Text="" Foreground="Black" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="100 25 400 10" TextAlignment="Center"/>
+                    <TextBlock Text="" Foreground="Black" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="400 -40 100 10" TextAlignment="Center"/>
+                    <!--Menu Seprator-->
+                    <Separator Margin="0" Background="#7E5FDC" DockPanel.Dock="Top" Height="0.8"/>
+
+                    <!--Menu Buttons-->
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock Text="Tên Đề Án" Margin="50 25 0 0" Height="22" RenderTransformOrigin="0.41,-2.558"/>
+                        <TextBox Name="Ten" Width="400" Margin="0 -25 0 0" Text="{Binding TENDA}"/>
+                        <TextBlock Text="Ngày Bắt Đầu" Margin="50 25 600 0"/>
+                        <DatePicker Height="25" Margin="0 -25 0 0" Name="Day" VerticalAlignment="Top" Width="115" Text="{Binding NGAYBD}"/>
+                        <ComboBox Name="Phong" Width="200" Margin="50 20 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding rooms}" DisplayMemberPath="TENPB" SelectedValuePath="TENPB" SelectedValue="{Binding TENPB}">
+                            
+                        </ComboBox>
+
+
+                    </StackPanel>
+
+                    <Button HorizontalAlignment="Left" Style="{StaticResource menuButton}" DockPanel.Dock="Bottom" Margin="30 -92 0 0" Click="Exit_Click" Height="40" Width="100">
+                        <StackPanel Orientation="Horizontal" >
+                            <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Exit" Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button HorizontalAlignment="Right" Style="{StaticResource menuButton}" DockPanel.Dock="Bottom" Margin="30 200 50 0" Click="UpdateDeAn_Click" Height="40" Width="100">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="       Cập Nhật" Foreground="Black" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </DockPanel>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
