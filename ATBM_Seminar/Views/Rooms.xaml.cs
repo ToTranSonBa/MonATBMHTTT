@@ -25,10 +25,12 @@ namespace ATBM_Seminar.Views
     /// </summary>
     public partial class Rooms : UserControl
     {
-        public Rooms()
+        private readonly OracleConnection _connection;
+        public Rooms(OracleConnection conn)
         {
+            _connection = conn;
             InitializeComponent();
-            LoadRooms();
+            LoadRooms(); 
         }
         public void LoadRooms()
         {
@@ -36,7 +38,7 @@ namespace ATBM_Seminar.Views
             {
                 RoomViewModel room = new RoomViewModel();
                 ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-                rooms = room.showRoom();
+                rooms = room.showRoom(_connection);
 
                 if (rooms == null)
                 {

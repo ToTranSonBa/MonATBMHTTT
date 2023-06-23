@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ATBM_Seminar.Models;
 using ATBM_Seminar.ModelViews;
+using ATBM_Seminar.Views.TruongDeAn;
 using ATBM_Seminar.Views.TruongPhongView;
 using Oracle.ManagedDataAccess.Client;
 
@@ -48,6 +49,11 @@ namespace ATBM_Seminar.Views
                     var giamdoc = new GiamDoc_Window(conn);
                     this.Close();
                     giamdoc.Show();
+                    break;
+                case "ATBMHTTT_ROLE_TRUONGDEAN":
+                    var trdean = new TruongDeAn_Window(conn);
+                    this.Close();
+                    trdean.Show();
                     break;
                 case "DBA":
                     {

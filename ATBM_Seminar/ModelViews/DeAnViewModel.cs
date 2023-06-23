@@ -1,4 +1,5 @@
 ﻿using ATBM_Seminar.Models;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,11 +13,11 @@ namespace ATBM_Seminar.ViewModels
 {
     public class DeAnViewModel:ViewModelBase
     {
-        public ObservableCollection<DeAn> showDeAn()
+        public ObservableCollection<DeAn> showDeAn(OracleConnection connection)
         {
             DeAn dean = new DeAn();
             ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
-            list_dean = dean.allDeAn();
+            list_dean = dean.allDeAn(connection);
 
             return list_dean;
         }

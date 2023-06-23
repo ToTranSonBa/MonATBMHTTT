@@ -17,21 +17,19 @@ namespace ATBM_Seminar.Models
         public string PHONG { get; set; }
 
 
-        public ObservableCollection<DeAn> allDeAn()
+        public ObservableCollection<DeAn> allDeAn(OracleConnection connection)
         {
             ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
 
 
             DataTable result = new DataTable();
-            Connect conn = new Connect();
 
             string query = "SELECT * FROM ATBM_20H3T_22.v_ShowAllDeAn";
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
                 OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
                 adapter.Fill(result);
-            }
+           
 
             for (int i = 0; i < result.Rows.Count; i++)
             {
@@ -42,22 +40,20 @@ namespace ATBM_Seminar.Models
                 dean.MADA = row["MADA"].ToString();
                 dean.TENDA = row["TENDA"].ToString();
                 dean.NGAYBD = row["NGAYBD"].ToString();
-                room=room.detailRoom(row["PHONG"].ToString());
+                room=room.detailRoom(connection,row["PHONG"].ToString());
                 dean.PHONG =room.TENPB;
                 list_dean.Add(dean);
             }
 
             return list_dean;
         }
-        public DeAn detailDeAn(string MADA)
+        public DeAn detailDeAn(OracleConnection connection, string MADA)
         {
             DeAn dean = new DeAn();
-            Connect conn = new Connect();
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
 
-                OracleCommand cmd = new OracleCommand("sp_GetDeAn", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_GetDeAn", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter cursorParam = cmd.Parameters.Add("DEANCURSOR", OracleDbType.RefCursor);
@@ -78,18 +74,12 @@ namespace ATBM_Seminar.Models
                     }
                 }
 
-            }
+            
             return dean;
         }
-        public void deleteDeAn(string MADA)
+        public void deleteDeAn(OracleConnection connection, string MADA)
         {
-            DeAn dean = new DeAn();
-            Connect conn = new Connect();
-
-            using (OracleConnection connection = conn.connectDatabase())
-            {
-
-                OracleCommand cmd = new OracleCommand("sp_DELETEDEAN", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_DELETEDEAN", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter inputParam = new OracleParameter("MA", OracleDbType.Char);
@@ -97,17 +87,14 @@ namespace ATBM_Seminar.Models
                 cmd.Parameters.Add(inputParam);
 
                 OracleDataReader reader = cmd.ExecuteReader();
-            }
+            
         }
-        public void addDeAn(string MADA,string TENDA, string NGAYBD, string PHONG)
+        public void addDeAn(OracleConnection connection, string MADA,string TENDA, string NGAYBD, string PHONG)
         {
-            DeAn dean = new DeAn();
-            Connect conn = new Connect();
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
 
-                OracleCommand cmd = new OracleCommand("sp_ADDDEAN", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_ADDDEAN", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter inputParam = new OracleParameter("MA", OracleDbType.Char);
@@ -127,17 +114,15 @@ namespace ATBM_Seminar.Models
                 cmd.Parameters.Add(inputParam4);
 
                 OracleDataReader reader = cmd.ExecuteReader();
-            }
+            
         }
-        public void updateDeAn(string MADA, string TENDA, string NGAYBD, string PHONG)
+        public void updateDeAn(OracleConnection connection, string MADA, string TENDA, string NGAYBD, string PHONG)
         {
-            DeAn dean = new DeAn();
-            Connect conn = new Connect();
+            
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
 
-                OracleCommand cmd = new OracleCommand("sp_UPDATEDEAN", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_UPDATEDEAN", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter inputParam = new OracleParameter("MA", OracleDbType.Char);
@@ -157,7 +142,7 @@ namespace ATBM_Seminar.Models
                 cmd.Parameters.Add(inputParam4);
 
                 OracleDataReader reader = cmd.ExecuteReader();
-            }
+            
         }
     }
 }

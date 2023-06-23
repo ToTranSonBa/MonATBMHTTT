@@ -24,8 +24,10 @@ namespace ATBM_Seminar.Views
     /// </summary>
     public partial class View_DeAn : UserControl
     {
-        public View_DeAn()
+        private readonly OracleConnection _connection;
+        public View_DeAn(OracleConnection conn)
         {
+            _connection = conn;
             InitializeComponent();
             LoadDeAn();
         }
@@ -35,7 +37,7 @@ namespace ATBM_Seminar.Views
             {
                 ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
                 DeAnViewModel dean = new DeAnViewModel();
-                list_dean = dean.showDeAn();
+                list_dean = dean.showDeAn(_connection);
 
                 if (list_dean == null)
                 {

@@ -1,4 +1,5 @@
 ﻿using ATBM_Seminar.ViewModels;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,10 @@ namespace ATBM_Seminar.Views.TruongDeAn
     /// </summary>
     public partial class TruongDeAn_Window : Window
     {
-        public TruongDeAn_Window()
+        private readonly OracleConnection _oracleConnection;
+        public TruongDeAn_Window(OracleConnection conn)
         {
+            _oracleConnection = conn;
             InitializeComponent();
             DataContext = new MainViewModel();
         }
@@ -52,6 +55,14 @@ namespace ATBM_Seminar.Views.TruongDeAn
                     IsMaximized = true;
                 }
             }
+        }
+        private void phBtn_Click(object sender, RoutedEventArgs e)
+        {
+            giamdocUC.Content = new Rooms(_oracleConnection);
+        }
+        private void daBtn_Click(object sender, RoutedEventArgs e)
+        {
+            giamdocUC.Content = new View_TruongDeAn_DeAn(_oracleConnection);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -32,10 +32,10 @@ namespace ATBM_Seminar.Models
                 Employee employee = new Employee();
 
                 DataRow row = result.Rows[i];
-                dean = dean.detailDeAn(row["MADA"].ToString());
+                dean = dean.detailDeAn(connection ,row["MADA"].ToString());
                 phancong.MADA = dean.TENDA;
 
-                employee = employee.Detail_Employee(row["MANV"].ToString());
+                employee = employee.Detail_Employee(connection, row["MANV"].ToString());
                 phancong.MANV = employee.TENNV;
 
                 phancong.THOIGIAN = row["THOIGIAN"].ToString();

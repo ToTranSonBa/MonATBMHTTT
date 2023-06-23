@@ -47,11 +47,6 @@ namespace ATBM_Seminar.Commands
             {
                 viewModels.SelectedViewModel = new PhanCongViewModel();
             }
-            //Của trưởng đề án
-            else if (parameter.ToString() == "Infor")
-            {
-                viewModels.SelectedViewModel = new InformationViewModel();
-            }
             else if (parameter.ToString() == "TrDeAn")
             {
                 viewModels.SelectedViewModel = new TrDeAnViewModel();

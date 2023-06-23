@@ -23,9 +23,11 @@ namespace ATBM_Seminar.Views.TruongDeAn
     /// </summary>
     public partial class UpdateDeAn : Window
     {
+        private readonly OracleConnection _connection;
         public string global_MADA { get; set; }
-        public UpdateDeAn(string MADA)
+        public UpdateDeAn(OracleConnection conn,string MADA)
         {
+            _connection = conn;
             global_MADA = MADA;
             InitializeComponent();
             LoadDeAnDetail(MADA);
@@ -37,11 +39,11 @@ namespace ATBM_Seminar.Views.TruongDeAn
                 DeAn dean = new DeAn();
 
                 TrDeAnViewModel trdean = new TrDeAnViewModel();
-                dean = trdean.showDetail_DeAn(MADA);
+                dean = trdean.showDetail_DeAn(_connection, MADA);
 
                 RoomViewModel room = new RoomViewModel();
                 ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-                rooms = room.showRoom();
+                rooms = room.showRoom(_connection);
                 Phong.ItemsSource = rooms;
                 Phong.DisplayMemberPath = "TENPB";
 
@@ -65,7 +67,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
 
             Room room = new Room();
             TrDeAnViewModel trdean = new TrDeAnViewModel();
-            room = trdean.getDetailRoomByName(TENPB);
+            room = trdean.getDetailRoomByName(_connection, TENPB);
 
 
             if (selectedDate.HasValue && TENDA != null && TENPB != null)
@@ -73,7 +75,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
                 string NGAYBD = selectedDate.Value.ToString("dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
                 TrDeAnViewModel deanviewmodel = new TrDeAnViewModel();
-                deanviewmodel.updateDeAn(global_MADA, TENDA, NGAYBD, room.MAPB);
+                deanviewmodel.updateDeAn(_connection, global_MADA, TENDA, NGAYBD, room.MAPB);
 
                 MessageBox.Show("Cập nhật thành công");
             }

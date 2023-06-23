@@ -24,8 +24,10 @@ namespace ATBM_Seminar.Views.TruongDeAn
     /// </summary>
     public partial class ADDDeAn : Window
     {
-        public ADDDeAn()
+        private readonly OracleConnection _connection;
+        public ADDDeAn(OracleConnection conn)
         {
+            _connection = conn;
             InitializeComponent();
             LoadRoom();
         }
@@ -39,11 +41,11 @@ namespace ATBM_Seminar.Views.TruongDeAn
 
             Room room = new Room();
             TrDeAnViewModel trdean = new TrDeAnViewModel();
-            room = trdean.getDetailRoomByName(TENPB);
+            room = trdean.getDetailRoomByName(_connection, TENPB);
 
             DeAn deAn=new DeAn();
             ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
-            list_dean = deAn.allDeAn();
+            list_dean = deAn.allDeAn(_connection);
 
             string MADA;
 
@@ -66,7 +68,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
                 string NGAYBD = selectedDate.Value.ToString("dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
                 TrDeAnViewModel deanviewmodel = new TrDeAnViewModel();
-                deanviewmodel.addDeAn(MADA, TENDA, NGAYBD, room.MAPB);
+                deanviewmodel.addDeAn( _connection ,MADA, TENDA, NGAYBD, room.MAPB);
 
                 MessageBox.Show("Thêm thành công");
             }
@@ -81,7 +83,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
             {
                 RoomViewModel room = new RoomViewModel();
                 ObservableCollection<Room> rooms = new ObservableCollection<Room>();
-                rooms = room.showRoom();
+                rooms = room.showRoom(_connection);
                 Phong.ItemsSource = rooms;
                 Phong.DisplayMemberPath = "TENPB";
 

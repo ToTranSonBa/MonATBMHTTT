@@ -22,10 +22,13 @@ namespace ATBM_Seminar.Views.TruongDeAn
     /// <summary>
     /// Interaction logic for View_TruongDeAn_DeAn.xaml
     /// </summary>
+    
     public partial class View_TruongDeAn_DeAn : UserControl
     {
-        public View_TruongDeAn_DeAn()
+        private readonly OracleConnection _connection;
+        public View_TruongDeAn_DeAn(OracleConnection conn)
         {
+            _connection=conn;
             InitializeComponent();
             LoadDeAn();
         }
@@ -35,7 +38,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
             {
                 ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
                 DeAnViewModel dean = new DeAnViewModel();
-                list_dean = dean.showDeAn();
+                list_dean = dean.showDeAn(_connection);
 
                 if (list_dean == null)
                 {
@@ -54,7 +57,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
         }
         private void AddDeAn_Click(object sender, RoutedEventArgs e)
         {
-            ADDDeAn adddean_window=new ADDDeAn();
+            ADDDeAn adddean_window=new ADDDeAn(_connection);
             adddean_window.ShowDialog();
             LoadDeAn();
         }
@@ -63,7 +66,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
             DeAn dean =new DeAn();    
             dean = ((FrameworkElement)sender).DataContext as DeAn;
             TrDeAnViewModel deanviewmodel=new TrDeAnViewModel();
-            deanviewmodel.deleteDeAn(dean.MADA);
+            deanviewmodel.deleteDeAn(_connection,dean.MADA);
             LoadDeAn();
         }
         private void UpdateDeAn_Click(object sender, RoutedEventArgs e)
@@ -71,7 +74,7 @@ namespace ATBM_Seminar.Views.TruongDeAn
             DeAn dean=new DeAn();
             dean = ((FrameworkElement)sender).DataContext as DeAn;
 
-            UpdateDeAn updatedean_window = new UpdateDeAn(dean.MADA);
+            UpdateDeAn updatedean_window = new UpdateDeAn( _connection,dean.MADA);
             updatedean_window.ShowDialog();
             LoadDeAn();
         }

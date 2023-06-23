@@ -18,10 +18,10 @@ namespace ATBM_Seminar.ViewModels
 
             return employees;
         }
-        public Employee showDetail_Employee(string MANV)
+        public Employee showDetail_Employee(OracleConnection connection, string MANV)
         {
             Employee employee = new Employee();
-            employee = employee.Detail_Employee(MANV);
+            employee = employee.Detail_Employee(connection,MANV);
 
             return employee;
         }

@@ -16,21 +16,19 @@ namespace ATBM_Seminar.Models
         public string MATRPHG { get; set; }
         public string TRPHG { get; set; }
 
-        public ObservableCollection<Room> allRoom()
+        public ObservableCollection<Room> allRoom(OracleConnection connection)
         {
             ObservableCollection<Room> list_room = new ObservableCollection<Room>();
 
 
             DataTable result = new DataTable();
-            Connect conn = new Connect();
 
             string query = "SELECT * FROM ATBM_20H3T_22.v_ShowAllPhongBan";
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
                 OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
                 adapter.Fill(result);
-            }
+            
 
             for (int i = 0; i < result.Rows.Count; i++)
             {
@@ -45,15 +43,13 @@ namespace ATBM_Seminar.Models
            
             return list_room;
         }
-        public Room detailRoom(string MaPB)
+        public Room detailRoom(OracleConnection connection, string MaPB)
         {
             Room room = new Room();
-            Connect conn = new Connect();
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
 
-                OracleCommand cmd = new OracleCommand("sp_GetRoom", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_GetRoom", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter cursorParam = cmd.Parameters.Add("ROOMCURSOR", OracleDbType.RefCursor);
@@ -72,19 +68,15 @@ namespace ATBM_Seminar.Models
                         room.MATRPHG= reader.GetString(2);
                     }
                 }
-
-            }
             return room;
         }
-        public Room getDetailRoomByName(string TENPB)
+        public Room getDetailRoomByName(OracleConnection connection, string TENPB)
         {
             Room room = new Room();
-            Connect conn = new Connect();
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
+            
 
-                OracleCommand cmd = new OracleCommand("sp_GetRoomByName", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_GetRoomByName", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter cursorParam = cmd.Parameters.Add("ROOMCURSOR", OracleDbType.RefCursor);
@@ -104,7 +96,7 @@ namespace ATBM_Seminar.Models
                     }
                 }
 
-            }
+            
             return room;
         }
     }

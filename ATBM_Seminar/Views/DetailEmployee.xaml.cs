@@ -23,8 +23,10 @@ namespace ATBM_Seminar.Views
     /// </summary>
     public partial class DetailEmployee : Window
     {
-        public DetailEmployee(string MANV)
+        private readonly OracleConnection _connection;
+        public DetailEmployee(OracleConnection conn, string MANV)
         {
+            _connection = conn;
             InitializeComponent();
             LoadDetailEmployee(MANV);
         }
@@ -35,7 +37,7 @@ namespace ATBM_Seminar.Views
                 Employee employee = new Employee();
 
                 EmployeeViewModel empviewmoddel= new EmployeeViewModel();   
-                employee = empviewmoddel.showDetail_Employee(MANV);
+                employee = empviewmoddel.showDetail_Employee(_connection,MANV);
                 this.DataContext = employee;
 
             }

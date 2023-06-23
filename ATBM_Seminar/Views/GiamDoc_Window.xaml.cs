@@ -69,7 +69,18 @@ namespace ATBM_Seminar.Views
         {
             giamdocUC.Content = new Employees(_oracleConnection);
         }
-
+        private void phBtn_Click(object sender, RoutedEventArgs e)
+        {
+            giamdocUC.Content = new Rooms(_oracleConnection);
+        }
+        private void daBtn_Click(object sender, RoutedEventArgs e)
+        {
+            giamdocUC.Content = new View_DeAn(_oracleConnection);
+        }
+        private void pcBtn_Click(object sender, RoutedEventArgs e)
+        {
+            giamdocUC.Content = new View_PhanCong(_oracleConnection);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _oracleConnection.Close();

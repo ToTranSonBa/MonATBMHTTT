@@ -54,21 +54,14 @@
 
                         <!--Menu Buttons-->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Infor">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Thông tin cá nhân"/>
-                                </StackPanel>
-                            </Button>
-
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Rooms" >
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" Click="phBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Phòng"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="TrDeAn" >
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}"  Click="daBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Đề Án"/>
@@ -119,10 +112,7 @@
                 <Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
 
-                <ContentControl  Content="{Binding SelectedViewModel}"
-                                    Grid.Row="5"
-                                    Margin="25"/>
-
+                <UserControl Name="giamdocUC" Grid.Row="5"></UserControl>
 
             </Grid>
 

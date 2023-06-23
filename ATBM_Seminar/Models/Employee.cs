@@ -28,7 +28,6 @@ namespace ATBM_Seminar.Models
             ObservableCollection<Employee> list_employee =new ObservableCollection<Employee>();
             
             DataTable result = new DataTable();
-            Connect conn = new Connect();
 
             string query = "SELECT * FROM ATBM_20H3T_22.v_ShowAllEmployee";
             OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
@@ -57,15 +56,12 @@ namespace ATBM_Seminar.Models
 
             return list_employee;
         }
-        public Employee Detail_Employee(string MANV)
+        public Employee Detail_Employee(OracleConnection connection, string MANV)
         {
             Employee employee = new Employee();
-            Connect conn = new Connect();
+            
 
-            using (OracleConnection connection = conn.connectDatabase())
-            {
-
-                OracleCommand cmd = new OracleCommand("sp_Get1Employee", connection);
+                OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_Get1Employee", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter cursorParam = cmd.Parameters.Add("EMPLOYCURSOR", OracleDbType.RefCursor);
@@ -91,16 +87,16 @@ namespace ATBM_Seminar.Models
                         if (!reader.IsDBNull(9))
                         {
                             Employee employee1 = new Employee();
-                            employee1 = employee1.Detail_Employee(reader.GetString(9));
+                            employee1 = employee1.Detail_Employee(connection,reader.GetString(9));
                             employee.MANQL = employee1.TENNV;
                         }
                         Room room=new Room();
-                        room=room.detailRoom(reader.GetString(10));
+                        room=room.detailRoom(connection, reader.GetString(10));
                         employee.PHG = room.TENPB;
                     }
                 }
 
-            }
+            
             return employee;
         }
     }

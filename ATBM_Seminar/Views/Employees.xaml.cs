@@ -69,7 +69,7 @@ namespace ATBM_Seminar.Views
             Employee employee = new Employee();
             employee = ((FrameworkElement)sender).DataContext as Employee;
 
-            DetailEmployee detailEmployee_window = new DetailEmployee(employee.MANV);
+            DetailEmployee detailEmployee_window = new DetailEmployee(_connection, employee.MANV);
             detailEmployee_window.ShowDialog();
         }
     }

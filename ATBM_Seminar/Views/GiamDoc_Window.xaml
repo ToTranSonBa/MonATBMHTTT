@@ -46,35 +46,35 @@
                         </Border>
 
                         <!--Menu Titles-->
-                        <TextBlock Text="Trưởng Phòng" Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="5 25 0 10" TextAlignment="Center"/>
+                        <TextBlock Text="Giám Đốc" Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="5 25 0 10" TextAlignment="Center"/>
 
                         <!--Menu Seprator-->
                         <Separator Margin="25" Background="#7E5FDC" DockPanel.Dock="Top" Height="0.8"/>
 
                         <!--Menu Buttons-->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Agents" x:Name="nvBtn" Click="nvBtn_Click">
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}"  x:Name="nvBtn" Click="nvBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Nhân Viên"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Rooms">
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" Click="phBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Phòng"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="DeAn" >
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}"  Click="daBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Đề Án"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="PhanCong" >
+                            <Button Style="{StaticResource menuButton}" Command="{Binding UpdateViewCommand}"  Click="pcBtn_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Phân Công"/>

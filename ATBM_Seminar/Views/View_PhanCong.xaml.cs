@@ -4,6 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,10 @@ namespace ATBM_Seminar.Views
     /// </summary>
     public partial class View_PhanCong : UserControl
     {
-        public View_PhanCong()
+        private readonly OracleConnection _connection;
+        public View_PhanCong(OracleConnection conn)
         {
+            _connection = conn;
             InitializeComponent();
             LoadPhanCong();
         }
@@ -35,7 +38,7 @@ namespace ATBM_Seminar.Views
             {
                 PhanCongViewModel phancong = new PhanCongViewModel();
                 ObservableCollection<PhanCong> list_phancong = new ObservableCollection<PhanCong>();
-                list_phancong = phancong.showPhanCong();
+                list_phancong = phancong.showPhanCong(_connection);
 
                 if (list_phancong == null)
                 {

@@ -1,4 +1,5 @@
 ﻿using ATBM_Seminar.Models;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,54 +12,54 @@ namespace ATBM_Seminar.ViewModels
 {
     public class TrDeAnViewModel:ViewModelBase
     {
-        public ObservableCollection<DeAn> showDeAn()
+        public ObservableCollection<DeAn> showDeAn(OracleConnection connection)
         {
             DeAn dean = new DeAn();
             ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
-            list_dean = dean.allDeAn();
+            list_dean = dean.allDeAn(connection);
 
             return list_dean;
         }
-        public void deleteDeAn(string MADA)
+        public void deleteDeAn(OracleConnection connection, string MADA)
         {
             DeAn dean = new DeAn();
             try {
-                dean.deleteDeAn(MADA);
+                dean.deleteDeAn(connection, MADA);
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        public void addDeAn(string MADA, string TENDA, string NGAYBD, string PHONG)
+        public void addDeAn(OracleConnection connection,string MADA, string TENDA, string NGAYBD, string PHONG)
         {
             DeAn dean = new DeAn();
             try
             {
-                dean.addDeAn(MADA,TENDA,NGAYBD,PHONG);
+                dean.addDeAn(connection,MADA,TENDA,NGAYBD,PHONG);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        public void updateDeAn(string MADA, string TENDA, string NGAYBD, string PHONG)
+        public void updateDeAn(OracleConnection connection,string MADA, string TENDA, string NGAYBD, string PHONG)
         {
             DeAn dean = new DeAn();
             try
             {
-                dean.updateDeAn(MADA, TENDA, NGAYBD, PHONG);
+                dean.updateDeAn(connection, MADA, TENDA, NGAYBD, PHONG);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        public DeAn showDetail_DeAn(string MADA)
+        public DeAn showDetail_DeAn(OracleConnection connection, string MADA)
         {
             DeAn dean = new DeAn();
             try
             {
-                dean=dean.detailDeAn(MADA);
+                dean=dean.detailDeAn(connection, MADA);
             }
             catch (Exception ex)
             {
@@ -66,10 +67,10 @@ namespace ATBM_Seminar.ViewModels
             }
             return dean;
         }
-        public Room getDetailRoomByName(string TENPB)
+        public Room getDetailRoomByName(OracleConnection connection,string TENPB)
         {
             Room room = new Room();
-            room=room.getDetailRoomByName(TENPB);
+            room=room.getDetailRoomByName(connection, TENPB);
             return room;
         }
     }
