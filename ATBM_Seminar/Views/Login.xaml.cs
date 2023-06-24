@@ -43,12 +43,17 @@ namespace ATBM_Seminar.Views
                     TruongPhongHome department = new TruongPhongHome(conn, role, session.Username);
                     this.Close();
                     department.Show();
-                    
                     break;
                 case "ATBMHTTT_ROLE_GIAMDOC":
                     var giamdoc = new GiamDoc_Window(conn);
                     this.Close();
                     giamdoc.Show();
+                    break;
+                case "ATBMHTTT_ROLE_QLTRUCTIEP":
+                    break;
+                case "ATBMHTTT_ROLE_TAICHINH":
+                    break;
+                case "ATBMHTTT_ROLE_NHANSU":
                     break;
                 case "ATBMHTTT_ROLE_TRUONGDEAN":
                     var trdean = new TruongDeAn_Window(conn);
@@ -119,10 +124,29 @@ namespace ATBM_Seminar.Views
                         }
                         else
                         {
-                            var multi = new MultiSession(conn, role, user);
-                            multi.Show();
-                            this.Close();
-                            return;
+                            string vaitro = "";
+                            string getVaitro = "select sys_context('atbm_user_ctx', 'atbm_role') from dual";
+                            try
+                            {
+                                using (OracleCommand cmd1 = new OracleCommand(getVaitro, conn))
+                                {
+                                    using (OracleDataReader reader1 = cmd1.ExecuteReader())
+                                    {
+                                        while (reader1.Read())
+                                        {
+                                            vaitro = reader.GetString(reader.GetOrdinal("ROLE"));
+                                        }
+                                    }
+                                }
+                                session.Username = user;
+                                session.Role = vaitro;
+                                directWindowUser(conn, session);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Người dùng không có quyền hạn trong hệ thống. Vui lòng liên hệ quản trị viên để biết thêm.");
+                            }
+
                         }
                     }
                 }   
