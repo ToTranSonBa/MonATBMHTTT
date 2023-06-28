@@ -48,32 +48,9 @@
         <!--Members Data Grid-->
         <DataGrid Height="450" Margin="40 0 40 0" Grid.Row="5" ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="ViewDataGrid" Style="{DynamicResource DataGridStyle1}" SelectionChanged="ViewDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Number}"/>
-                <DataGridTemplateColumn Header="View Name" IsReadOnly="True" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <!--<Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                </Border>-->
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Owner" Binding="{Binding Owner}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Created_Day" Binding="{Binding }" IsReadOnly="True" Width="*"/>
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Name="buttonDeleteView" Click="buttonDeleteView_Click">
-                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="View Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Text Length"  Binding="{Binding Length}"/>
+                <DataGridTextColumn Header="Text"  Binding="{Binding Text}"/>
             </DataGrid.Columns>
         </DataGrid>
 

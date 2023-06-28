@@ -39,6 +39,7 @@ namespace ATBM_Seminar.Views
             privilegeName.Text = privilegeName.Text + " " + _userName;
             ChangeRoleUserName.Text = ChangeRoleUserName.Text + " " + _userName;
             ChangePasswordNameUser.Text = ChangePasswordNameUser.Text + " " + _userName;
+            Title.Text = _userName;
             ButtonChangePasswordUser_Click(null, null);
 
         }

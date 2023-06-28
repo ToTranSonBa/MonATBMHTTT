@@ -32,6 +32,7 @@ namespace ATBM_Seminar.Views
             _admin = admin;
             InitializeComponent();
             roleName = roleChoosed;
+            Tilte.Text = roleName;
             buttonUserOfRole_Click(null, null);
         }
 
@@ -213,36 +214,36 @@ namespace ATBM_Seminar.Views
 
         }
 
-        private class users_role
-        {
-            public string grantee { get; set; }
-            public string granted_role { get; set; }
-            public string admin_option { get; set; }
-            public string delegate_option { get; set; }
-            public string default_role { get; set; }
-            public string common { get; set; }
-            public string Inherited { get; set; }
-            public Brush BgColor { get; set; }
+        //private class users_role
+        //{
+        //    public string grantee { get; set; }
+        //    public string granted_role { get; set; }
+        //    public string admin_option { get; set; }
+        //    public string delegate_option { get; set; }
+        //    public string default_role { get; set; }
+        //    public string common { get; set; }
+        //    public string Inherited { get; set; }
+        //    public Brush BgColor { get; set; }
 
-            public string Number { get; set; }
-        }
+        //    public string Number { get; set; }
+        //}
 
-        private class privileges_role
-        {
-            public string grantee { get; set; }
-            public string owner { get; set; }
-            public string Table_name { get; set; }
-            public string Grantor { get; set; }
-            public string Privs { get; set; }
-            public string GrantTable { get; set; }
-            public string hierarchy { get; set; }
-            public string common { get; set; }
-            public string Type { get; set; }
-            public string Inherite { get; set; }
-            public Brush BgColor { get; set; }
+        //private class privileges_role
+        //{
+        //    public string grantee { get; set; }
+        //    public string owner { get; set; }
+        //    public string Table_name { get; set; }
+        //    public string Grantor { get; set; }
+        //    public string Privs { get; set; }
+        //    public string GrantTable { get; set; }
+        //    public string hierarchy { get; set; }
+        //    public string common { get; set; }
+        //    public string Type { get; set; }
+        //    public string Inherite { get; set; }
+        //    public Brush BgColor { get; set; }
 
-            public string Number { get; set; }
-        }
+        //    public string Number { get; set; }
+        //}
 
         private void buttonUserOfRole_Click(object sender, RoutedEventArgs e)
         {

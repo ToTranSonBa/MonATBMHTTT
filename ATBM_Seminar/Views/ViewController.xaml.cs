@@ -26,6 +26,7 @@ namespace ATBM_Seminar.Views
         {
             _admin = admin;
             InitializeComponent();
+            ViewDataGrid.ItemsSource = _admin.GetView();
         }
 
         private void SearchView_TextChanged(object sender, TextChangedEventArgs e)

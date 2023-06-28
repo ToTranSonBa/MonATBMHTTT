@@ -588,5 +588,36 @@ namespace ATBM_Seminar.ModelViews
             }
         }
         #endregion
+        #region View
+        public List<View> GetView()
+        {
+            try
+            {
+                var list = new List<View>();
+                string SQLcontext = $"select * from all_views where owner = '{_user}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new View
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("VIEW_NAME")),
+                                Text = reader.GetString(reader.GetOrdinal("TEXT")),
+                                Length = reader.GetString(reader.GetOrdinal("TEXT_LENGTH"))
+                            });
+                        }
+                    }
+                }
+                return list;
+
+            }
+            catch
+            {
+                return new List<View>();
+            }
+        }
+        #endregion
     }
 }

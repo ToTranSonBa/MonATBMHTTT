@@ -37,7 +37,8 @@
         </Grid>
 
         <Border Background="#EFF2F7" Grid.Row="1" Width="750" Height="380" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-            <DataGrid AutoGenerateColumns="False" 
+            <DataGrid ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}"
+                AutoGenerateColumns="False" 
           CanUserAddRows="False" x:Name="AgentsDataGrid"
           HeadersVisibility="All" 
           ItemsSource="{Binding Employees}">
@@ -47,7 +48,18 @@
                     <DataGridTextColumn Width="150" Header="Phòng" Binding="{Binding PHG}"/>
                     <DataGridTextColumn Width="100" Header="Lương" Binding="{Binding LUONG}"/>
                     <DataGridTextColumn Width="100" Header="Phụ cấp" Binding="{Binding PHUCAP}"/>
-                    <DataGridTemplateColumn Header="Chi tiết">
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Name="editEmp" Click="EmployeeDetail_Click">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTemplateColumn Header="Chi tiết">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Click="EmployeeDetail_Click" >
@@ -55,7 +67,7 @@
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    </DataGridTemplateColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

@@ -28,6 +28,8 @@ namespace ATBM_Seminar.Views.UserDetailView
             _admin = adminMV;
             _userName = username;
             InitializeComponent();
+
+            txtUserName.Text = _userName;
         }
 
         private void ChangePasswordUser(object sender, RoutedEventArgs e)

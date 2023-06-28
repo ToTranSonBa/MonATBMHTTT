@@ -38,6 +38,8 @@ namespace ATBM_Seminar.Views.NhanVienView
             /*ConnectionDB conn = new ConnectionDB()*/;
             ////_oracleConnection = conn.OracleConnection("NV032", "NV032");
             InitializeComponent();
+            Title.Text = _userName;
+            CanhanBTN_Click(null, null);
             //DataContext = new MainViewModel();
         }
 

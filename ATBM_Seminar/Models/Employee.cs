@@ -110,7 +110,7 @@ namespace ATBM_Seminar.Models
             DataTable result = new DataTable();
             //Connect conn = new Connect();
 
-            string query = "SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN";
+            string query = "SELECT MANV, tennv, phai, ngaysinh, diachi, sodt, vaitro, MANQL, PHG, atbm_20h3t_22.decryto_function(LUONG, MANV) LUONG, atbm_20h3t_22.decryto_function(PHUCAP, MANV) PHUCAP FROM ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN";
 
 
             OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
@@ -128,8 +128,8 @@ namespace ATBM_Seminar.Models
                 employee.NGAYSINH = row["NGAYSINH"].ToString();
                 employee.DIACHI = row["DIACHI"].ToString();
                 employee.SODT = row["SODT"].ToString();
-                employee.LUONG = Convert.ToInt32(row["LUONG"]);
-                employee.PHUCAP = Convert.ToInt32(row["PHUCAP"]);
+                employee.LUONG = (row["LUONG"]).ToString();
+                employee.PHUCAP = (row["PHUCAP"]).ToString();
                 employee.VAITRO = row["VAITRO"].ToString();
                 employee.MANQL = row["MANQL"].ToString();
                 employee.PHG = row["PHG"].ToString();
@@ -144,8 +144,7 @@ namespace ATBM_Seminar.Models
         {
             Employee employee = null;
 
-            string query = $"SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN WHERE MANV = '{MANV}' ";
-
+            string query = $"SELECT MANV, tennv, phai, ngaysinh, diachi, sodt, vaitro, MANQL, PHG, atbm_20h3t_22.decryto_function(LUONG, MANV) LUONG, atbm_20h3t_22.decryto_function(PHUCAP, MANV) PHUCAP FROM ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN WHERE MANV = '{MANV}' ";
             OracleCommand cmd = new OracleCommand(query, connection);
 
             using (OracleDataReader reader = cmd.ExecuteReader())
@@ -160,13 +159,13 @@ namespace ATBM_Seminar.Models
                     employee.NGAYSINH = reader.GetString(3);
                     employee.DIACHI = reader.GetString(4);
                     employee.SODT = reader.GetString(5);
-                    employee.LUONG = reader.GetDecimal(6);
-                    employee.PHUCAP = reader.GetDecimal(7);
-                    employee.VAITRO = reader.GetString(8);
+                    employee.LUONG = reader["LUONG"].ToString();
+                    employee.PHUCAP = reader["PHUCAP"].ToString();
+                    employee.VAITRO = reader["VAITRO"].ToString();
                     employee.MANQL = reader["MANQL"].ToString();
 
                     Room room = new Room();
-                    room = room.getOnePhongBan_DB(connection, reader.GetString(10));
+                    room = room.getOnePhongBan_DB(connection, reader["PHG"].ToString());
                     employee.PHG = room.TENPB;
                 }
             }
@@ -217,7 +216,7 @@ namespace ATBM_Seminar.Models
         // update lương one employee
         public void updateThongTinNhanVien_DB(OracleConnection connection, string MANV, string NGAYSINH, string DIACHI, string SODT)
         {
-            string query = $"UPDATE ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN SET NGAYSINH = TO_DATE('{NGAYSINH}','MM/DD/YYYY'), DIACHI = '{DIACHI}', SODT = {SODT} WHERE MANV = '{MANV}'";
+            string query = $"UPDATE ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN SET NGAYSINH = TO_DATE('{NGAYSINH}','MM/DD/YYYY'), DIACHI = '{DIACHI}', SODT = '{SODT}' WHERE MANV = '{MANV}'";
             OracleCommand cmd = new OracleCommand(query, connection);
             cmd.ExecuteNonQuery();
         }
@@ -227,7 +226,7 @@ namespace ATBM_Seminar.Models
         {
             try
             {
-                string query = $"UPDATE ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN SET NGAYSINH = TO_DATE('{NGAYSINH}','MM/DD/YYYY'), DIACHI = '{DIACHI}', SODT = {SODT}";
+                string query = $"UPDATE ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN SET NGAYSINH = TO_DATE('{NGAYSINH}','MM/DD/YYYY'), DIACHI = '{DIACHI}', SODT = '{SODT}'";
                 OracleCommand cmd = new OracleCommand(query, connection);
                 cmd.ExecuteNonQuery();
             }

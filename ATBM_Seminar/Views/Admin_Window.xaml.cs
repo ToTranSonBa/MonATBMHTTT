@@ -40,6 +40,7 @@ namespace ATBM_Seminar.Views
             userButton.Style = this.FindResource("isSelectButton") as Style;
             tableviewButton.Style = this.FindResource("menuButton") as Style;
             LoaderWindow();
+            Title.Text = _user;
         }
         private void LoaderWindow()
         {

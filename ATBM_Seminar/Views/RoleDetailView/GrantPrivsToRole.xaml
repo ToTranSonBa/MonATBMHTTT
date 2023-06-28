@@ -33,7 +33,7 @@
             </WrapPanel>
 
             <!--Page Title-->
-            <TextBlock Padding="0 40 0 40" Text="Grant Role To User" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="ChangePasswordNameUser"/>
+            <TextBlock Padding="0 40 0 40" Text="Grant Privilege To Role" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="ChangePasswordNameUser"/>
         </Grid>
 
         <!--Seprator-->

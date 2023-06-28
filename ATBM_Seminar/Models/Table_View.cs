@@ -16,7 +16,7 @@ namespace ATBM_Seminar.Models
     public class View
     {
         public string Name { get; set; }
-        public string Owner { get; set; }
-        public string Tablespace { get; set; }
+        public string Length { get; set; }
+        public string Text { get; set; }
     }
 }

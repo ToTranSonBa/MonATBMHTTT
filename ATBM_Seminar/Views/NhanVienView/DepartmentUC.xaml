@@ -36,7 +36,8 @@
         </Grid>
 
         <Border Background="#EFF2F7" Grid.Row="1" Width="750" Height="380" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-            <DataGrid AutoGenerateColumns="False" 
+            <DataGrid ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}"
+                AutoGenerateColumns="False" 
                 CanUserAddRows="False" x:Name="RoomsDataGrid"
                 HeadersVisibility="All" SelectionChanged="equipmentListView_SelectionChanged">
                 <DataGrid.Columns >
@@ -45,16 +46,6 @@
                     <DataGridTextColumn Width="250" Header="Tên phòng ban" Binding="{Binding TENPB}"/>
                     <DataGridTextColumn Width="250" Header="Trưởng phòng" Binding="{Binding MATRPHG}"/>
                     <!--<DataGridTextColumn Width="150" Header="Thời gian" Binding="{Binding Amount}"/>-->
-
-                    <DataGridTemplateColumn  Header="Chi tiết">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button>
-                                    <materialDesign:PackIcon Kind="Details" />
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn >
                 </DataGrid.Columns>
             </DataGrid>
         </Border>

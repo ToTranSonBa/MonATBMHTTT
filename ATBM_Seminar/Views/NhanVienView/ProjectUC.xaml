@@ -17,7 +17,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90,0,0,0">
+            <!--<StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90,0,0,0">
                 <Border Margin="0 3 10 3"  BorderBrush="Black" BorderThickness="2" CornerRadius="10" Width="300">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -32,31 +32,20 @@
                         </Button>
                     </Grid>
                 </Border>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
 
-        <Border Background="#EFF2F7" Grid.Row="1" Width="750" Height="380" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-            <DataGrid AutoGenerateColumns="False" 
+        <DataGrid Height="500" ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}"
+                AutoGenerateColumns="False" 
                 CanUserAddRows="False" x:Name="DeAnDataGrid"
-                HeadersVisibility="All" SelectionChanged="equipmentListView_SelectionChanged">
-                <DataGrid.Columns >
+                HeadersVisibility="All" SelectionChanged="equipmentListView_SelectionChanged" Margin="9,-37,-9,37">
+            <DataGrid.Columns >
 
-                    <DataGridTextColumn Width="130" Binding="{Binding MADA}" Header="Mã đề án" />
-                    <DataGridTextColumn Width="200" Header="Tên đề án" Binding="{Binding TENDA}"/>
-                    <DataGridTextColumn Width="180" Header="Ngày bắt đầu" Binding="{Binding NGAYBD}"/>
-                    <DataGridTextColumn Width="150" Header="Phòng" Binding="{Binding PHONG}"/>
-
-                    <DataGridTemplateColumn  Header="Chi tiết">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button>
-                                    <materialDesign:PackIcon Kind="Details" />
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn >
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
+                <DataGridTextColumn Width="130" Binding="{Binding MADA}" Header="Mã đề án" />
+                <DataGridTextColumn Width="200" Header="Tên đề án" Binding="{Binding TENDA}"/>
+                <DataGridTextColumn Width="180" Header="Ngày bắt đầu" Binding="{Binding NGAYBD}"/>
+                <DataGridTextColumn Width="150" Header="Phòng" Binding="{Binding PHONG}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
