@@ -66,7 +66,10 @@ namespace ATBM_Seminar.Views.TruongDeAn
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            _oracleConnection.Close();
+            var loginwindow = new Login();
             this.Close();
+            loginwindow.Show();
         }
     }
 }

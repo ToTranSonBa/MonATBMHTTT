@@ -133,7 +133,7 @@
                     <!--new PASSWORD-->
                     <Label Margin="0 50 0 0" Width="500" Height="50" Content="New Password:" Target="{Binding ElementName=txtPassword}" FontWeight="Bold" FontSize="24" />
                     <PasswordBox  VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="24" FontWeight="Bold" Width="500" Height="50" Name="txtPassword" />
-                    <Button Padding="10 0 0 5" Margin="0 30 0 0" Content="SUBMIT" Height="50" Click="ChangePasswordUser" FontSize="24" FontWeight="Bold">
+                    <Button Padding="10 0 0 5" Margin="0 30 0 0" Content="SUBMIT" Height="50" Click="ButtonChangePasswordUser_Click" FontSize="24" FontWeight="Bold">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border x:Name="border" CornerRadius="20" BorderBrush="Black" BorderThickness="2" Background="#623ED0">
@@ -152,6 +152,60 @@
             </Grid>
             
             <!--Role section-->
+            <Grid Visibility="Hidden" Grid.Column="1" Margin="30 20 20 20" Name="RoleUserWindow">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="4*"/>
+                    <!--<RowDefinition Height="auto"/>-->
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0" VerticalAlignment="Top">
+                    <!--Top Buttons-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                        <!--<RowDefinition Height="auto"/>-->
+                    </Grid.RowDefinitions>
+                    <WrapPanel FlowDirection="RightToLeft" Grid.Row="0">
+                        <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
+                            <Icon:PackIconMaterial Kind="Cog"/>
+                        </Button>
+                        <Button Style="{StaticResource topButton}" Margin="0 0 55 0" >
+                            <Icon:PackIconMaterial Kind="Bell"/>
+                        </Button>
+                    </WrapPanel>
+
+                    <!--Page Title-->
+                    <!--<TextBlock Padding="0 40 0 40" Text="ADD ROLE FOR " Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="ChangeRoleUserName"/>-->
+                </Grid>
+
+                <!--Seprator-->
+                <Separator Height="1" Grid.Row="1" Background="#DAE2EA" Margin="0 -1 0 10"/>
+
+
+                <DataGrid ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="RoleOfUser_datagrid" Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Role Name" Binding="{Binding ROLE}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Grant admin option" Binding="{Binding ADMIN_OPTION}" IsReadOnly="True" Width="*"/>
+                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButton}" Name="deleteroletBtn" Click="deleteroletBtn_Click">
+                                            <Icon:PackIconMaterial Kind="Delete" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+            
+            <!-- change role -->
             <Grid Visibility="Hidden" Grid.Column="1" Margin="30 20 20 20" Name="ChangeRoleUserWindow">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -186,10 +240,8 @@
 
                 <!--change pwd-->
                 <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 50 0 0">
-                    <!--USER NAME-->
                     <Label Width="500" Height="50" Content="User:" Target="{Binding ElementName=txtUserName}" FontSize="24" FontWeight="Bold" />
                     <TextBox IsReadOnly="True"  Padding="10 0 0 5" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="24" FontWeight="Bold" Width="500" Height="50"  Name="ListBoxUserchangeRole"/>
-                    <!--new PASSWORD-->
                     <Label Margin="10 50 0 0" Width="500" Height="50" Content="Role:" Target="{Binding ElementName=txtPassword}" FontWeight="Bold" FontSize="24" />
                     <ComboBox  VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="24" FontWeight="Bold" Width="500" Height="50"  Name="ListBoxRoleOfUserchangeRole"/>
                     <CheckBox  Margin="0 20 0 20" Content="With grant option" Name="WithGrantOptionCheckBox"></CheckBox>
@@ -209,11 +261,10 @@
                         </Button.Template>
                     </Button>
                 </StackPanel>
-
             </Grid>
-            
+
             <!--Privs section-->
-            <Grid Visibility="Visible" Grid.Column="1" Margin="30 20 20 20" Name="PrivilegeUser">
+            <Grid Visibility="Hidden" Grid.Column="1" Margin="30 20 20 20" Name="PrivilegeUser">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -290,7 +341,7 @@
                 </DataGrid>
 
             </Grid>
-
+            <UserControl Grid.Column="1" x:Name="detailUserController"></UserControl>
         </Grid>
     </Border>
 </Window>

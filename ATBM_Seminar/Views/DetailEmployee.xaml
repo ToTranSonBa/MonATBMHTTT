@@ -35,21 +35,21 @@
                     <!--Menu Buttons-->
                     <StackPanel DockPanel.Dock="Top">
                         <TextBlock Text="Phòng" Margin="50 25 0 0" Height="22" RenderTransformOrigin="0.41,-2.558"/>
-                        <TextBox Text="{Binding PHG}" Width="400" Margin="0 -25 0 0"/>
-                        <TextBlock Text="Giới tính" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding PHAI}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PHG}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBlock  Text="Giới tính" Margin="50 25 600 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PHAI}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Ngày sinh" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding NGAYSINH}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding NGAYSINH}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Địa chỉ" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding DIACHI}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding DIACHI}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Số Điện thoại" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding SODT}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding SODT}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Lương" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding LUONG}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding LUONG}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Phụ cấp" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding PHUCAP}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PHUCAP}" Width="400" Margin="0 -25 0 0"/>
                         <TextBlock Text="Nhân viên quản lý" Margin="50 25 600 0"/>
-                        <TextBox Text="{Binding MANQL}" Width="400" Margin="0 -25 0 0"/>
+                        <TextBox IsReadOnly="True" Text="{Binding MANQL}" Width="400" Margin="0 -25 0 0"/>
                     </StackPanel>
 
                     <Button HorizontalAlignment="Left" Style="{StaticResource menuButton}" DockPanel.Dock="Bottom" Margin="30 0 0 0" Click="Exit_Click" Height="40" Width="100">

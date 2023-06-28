@@ -17,8 +17,8 @@ namespace ServerATBM.Controllers
         public string DIACHI { get; set; }
         public string S0DT { get; set; }
 
-        public decimal LUONG { get; set; }
-        public decimal PHUCAP { get; set; }
+        public string LUONG { get; set; }
+        public string PHUCAP { get; set; }
         public string VAITRO { get; set; }
         public string MANQL { get; set; }
         public string PHG { get; set; }

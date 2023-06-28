@@ -246,6 +246,7 @@
     <Compile Include="Models\PhanCong_Class.cs" />
     <Compile Include="Models\PhongBan_Class.cs" />
     <Compile Include="Models\privileges.cs" />
+    <Compile Include="Models\RoleOfUserModel.cs" />
     <Compile Include="Models\Roles_Window.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Session.cs" />
@@ -304,6 +305,21 @@
     <Compile Include="Views\MultiSession.xaml.cs">
       <DependentUpon>MultiSession.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RoleDetailView\GrantPrivsToRole.xaml.cs">
+      <DependentUpon>GrantPrivsToRole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleDetailView\GrantRoleToUser.xaml.cs">
+      <DependentUpon>GrantRoleToUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleDetailView\PrivilegeOnColumn.xaml.cs">
+      <DependentUpon>PrivilegeOnColumn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleDetailView\PrivsOfRole.xaml.cs">
+      <DependentUpon>PrivsOfRole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoleDetailView\UserOfRole.xaml.cs">
+      <DependentUpon>UserOfRole.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RolesController.xaml.cs">
       <DependentUpon>RolesController.xaml</DependentUpon>
     </Compile>
@@ -357,6 +373,15 @@
     </Compile>
     <Compile Include="Views\UserController.xaml.cs">
       <DependentUpon>UserController.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserDetailView\ChangePasswordUserUC.xaml.cs">
+      <DependentUpon>ChangePasswordUserUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserDetailView\PrivsOfUserUC.xaml.cs">
+      <DependentUpon>PrivsOfUserUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserDetailView\RolesOfUserUC.xaml.cs">
+      <DependentUpon>RolesOfUserUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewController.xaml.cs">
       <DependentUpon>ViewController.xaml</DependentUpon>
@@ -416,6 +441,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MultiSession.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleDetailView\GrantPrivsToRole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleDetailView\GrantRoleToUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleDetailView\PrivilegeOnColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleDetailView\PrivsOfRole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoleDetailView\UserOfRole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -488,6 +533,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserDetailView\ChangePasswordUserUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserDetailView\PrivsOfUserUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserDetailView\RolesOfUserUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

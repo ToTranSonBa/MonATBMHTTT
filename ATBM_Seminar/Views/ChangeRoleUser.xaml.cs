@@ -94,7 +94,9 @@ namespace ATBM_Seminar.Views
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Admin_Window admin = new Admin_Window(_admin.connection, _admin._role, _admin._user);
             this.Close();
+            //admin.Show();
         }
         private List<string> getRole()
         {

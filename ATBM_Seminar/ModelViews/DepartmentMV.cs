@@ -62,7 +62,7 @@ namespace ATBM_Seminar.ModelViews
             try
             {
                 List<NHANVIEN> list = new List<NHANVIEN>();
-                string SQLcontext = "SELECT * FROM atbm_20h3t_22.atbmhttt_table_nhanvien";
+                string SQLcontext = "select * from ATBM_20H3T_22.View_Employee_Department";
                 using (OracleCommand cmd = new OracleCommand( SQLcontext, connection))
                 {
                     using(OracleDataReader reader = cmd.ExecuteReader())
@@ -142,7 +142,7 @@ namespace ATBM_Seminar.ModelViews
             try
             {
                 List<NHANVIEN> list = new List<NHANVIEN>();
-                string SQLcontext = $"SELECT * FROM atbm_20h3t_22.atbmhttt_table_nhanvien WHERE MANV = '{user}'";
+                string SQLcontext = $"SELECT MANV, tennv, phai, ngaysinh, diachi, sodt, vaitro, PHG, atbm_20h3t_22.decryto_function(LUONG, MANV) LUONG, atbm_20h3t_22.decryto_function(PHUCAP, MANV) PHUCAP FROM  atbm_20h3t_22.ATBMHTTT_TABLE_NHANVIEN";
                 using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
                 {
                     using (OracleDataReader reader = cmd.ExecuteReader())
@@ -159,8 +159,8 @@ namespace ATBM_Seminar.ModelViews
                                 S0DT = reader.GetString(reader.GetOrdinal("SODT")),
                                 VAITRO = reader.GetString(reader.GetOrdinal("VAITRO")),
                                 PHG = reader.GetString(reader.GetOrdinal("PHG")),
-                                LUONG = reader.GetDecimal(reader.GetOrdinal("LUONG")),
-                                PHUCAP = reader.GetDecimal(reader.GetOrdinal("PHUCAP"))
+                                LUONG = reader.GetString(reader.GetOrdinal("LUONG")),
+                                PHUCAP = reader.GetString(reader.GetOrdinal("PHUCAP"))
                             });
                         }
                     }

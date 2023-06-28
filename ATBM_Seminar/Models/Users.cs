@@ -14,5 +14,6 @@ namespace ATBM_Seminar.Models
         public string Number { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
+        public string admin_option { get; set; }
     }
 }

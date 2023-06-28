@@ -64,6 +64,24 @@
                                     <TextBlock Text="Privilege"/>
                                 </StackPanel>
                             </Button>
+                            <Button Style="{StaticResource menuButton}" Name="addUser" Click="addUser_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Add user"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}" Name="addPrivs" Click="addPrivs_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Add privs"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource menuButton}" Name="PrivsCol" Click="PrivsCol_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Privs on Column"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
 
                         <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="Button_Click">
@@ -78,8 +96,7 @@
 
             </Grid>
 
-            <!--Main Section-->
-            <Grid Visibility="Visible" Grid.Column="1" Margin="30 20 20 20" Name="UserOfRole">
+            <!--<Grid Visibility="Visible" Grid.Column="1" Margin="30 20 20 20" Name="UserOfRole">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -91,7 +108,6 @@
                 </Grid.RowDefinitions>
 
 
-                <!--Top Buttons-->
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
@@ -100,20 +116,10 @@
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
 
-                <!--Page Title-->
                 <TextBlock Text="Users of  " Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left" Name="UserofRoleName"/>
 
-                <!--Add Button-->
-
-                <!--Seprator-->
                 <Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
-                <!--Tab buttons-->
-
-
-                <!--Counter Title-->
-
-                <!--Members Data Grid-->
                 <DataGrid Margin="0 50 0 0" ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="UserOfRoleDataGrid" Style="{DynamicResource DataGridStyle1}" SelectionChanged="membersDataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
@@ -129,7 +135,6 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                            <!--<TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>-->
                                         </Border>
 
                                         <TextBlock Text="{Binding grantee}" VerticalAlignment="Center"/>
@@ -156,8 +161,7 @@
                 </DataGrid>
 
             </Grid>
-            <!--Privigale section-->
-            <Grid Visibility="Hidden" Grid.Column="1" Margin="30 20 20 20" Name="PrivilegeRoles">
+            --><!--<Grid Visibility="Hidden" Grid.Column="1" Margin="30 20 20 20" Name="PrivilegeRoles">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -169,7 +173,6 @@
                 </Grid.RowDefinitions>
 
 
-                <!--Top Buttons-->
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
@@ -178,10 +181,8 @@
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
 
-                <!--Page Title-->
                 <TextBlock Text="Privileges " Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left" Name="privilegeOfRoleName"/>
 
-                <!--Add Button-->
                 <Button Style="{StaticResource addButton}">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11"/>
@@ -189,15 +190,8 @@
                     </StackPanel>
                 </Button>
 
-                <!--Seprator-->
                 <Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
-                <!--Tab buttons-->
-
-
-                <!--Counter Title-->
-
-                <!--Members Data Grid-->
                 <DataGrid Margin="0 50 0 0" ScrollViewer.CanContentScroll="True" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="PrivsDataRole" Style="{DynamicResource DataGridStyle1}" SelectionChanged="membersDataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
@@ -213,7 +207,6 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                            <!--<TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>-->
                                         </Border>
 
                                         <TextBlock Text="{Binding Table_name}" VerticalAlignment="Center"/>
@@ -239,8 +232,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-            </Grid>
+            </Grid>-->
 
+            <UserControl Grid.Column="1" Name="RoleUserControl"></UserControl>
         </Grid>
     </Border>
 </Window>

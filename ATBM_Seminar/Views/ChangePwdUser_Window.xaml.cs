@@ -17,7 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using ATBM_Seminar.Views.UserDetailView;
 
 namespace ATBM_Seminar.Views
 {
@@ -28,13 +28,14 @@ namespace ATBM_Seminar.Views
     {
         private readonly AdminMV _admin;
         private readonly string _userName;
+        private readonly List<string> _roles;
         public ChangePwdUser_Window(AdminMV admin, string username)
         {
             _admin = admin;
             InitializeComponent();
             _userName = username;
             txtUserName.Text = _userName;
-            ListBoxUserchangeRole.Text = _userName;
+            //ListBoxUserchangeRole.Text = _userName;
             privilegeName.Text = privilegeName.Text + " " + _userName;
             ChangeRoleUserName.Text = ChangeRoleUserName.Text + " " + _userName;
             ChangePasswordNameUser.Text = ChangePasswordNameUser.Text + " " + _userName;
@@ -42,44 +43,44 @@ namespace ATBM_Seminar.Views
 
         }
 
-        private void ChangePasswordUser(object sender, RoutedEventArgs e)
-        {
+        //private void ChangePasswordUser(object sender, RoutedEventArgs e)
+        //{
             
-            MessageBoxResult result = MessageBoxResult.None;
-            try
-            {
+        //    MessageBoxResult result = MessageBoxResult.None;
+        //    try
+        //    {
                 
-                // get user and password
-                TextBox textBox = new TextBox();
-                textBox = txtUserName;
+        //        // get user and password
+        //        TextBox textBox = new TextBox();
+        //        textBox = txtUserName;
 
-                PasswordBox passwordBox = new PasswordBox();
-                passwordBox = txtPassword;
-                string pwd = passwordBox.Password;
+        //        PasswordBox passwordBox = new PasswordBox();
+        //        passwordBox = txtPassword;
+        //        string pwd = passwordBox.Password;
 
-                _admin.ChangePwdUser(_userName, pwd);
-                //show message
-                result = MessageBox.Show("Change Password is success!", "Change password user", MessageBoxButton.OK);
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Change password user");
-            }
+        //        _admin.ChangePwdUser(_userName, pwd);
+        //        //show message
+        //        result = MessageBox.Show("Change Password is success!", "Change password user", MessageBoxButton.OK);
+        //    } catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Change password user");
+        //    }
 
-            //catch result messagebox
-            switch (result)
-            {
-                case MessageBoxResult.OK:
-                    Admin_Window admin_Window = new Admin_Window(_admin.connection, _admin._role, _admin._user);
-                    admin_Window.Show();
-                    this.Close();
-                    break;
-                case MessageBoxResult.None:
-                    MessageBox.Show("None");
-                    break;
-                default:
-                    break;
-            }
-        }
+        //    //catch result messagebox
+        //    switch (result)
+        //    {
+        //        case MessageBoxResult.OK:
+        //            Admin_Window admin_Window = new Admin_Window(_admin.connection, _admin._role, _admin._user);
+        //            admin_Window.Show();
+        //            this.Close();
+        //            break;
+        //        case MessageBoxResult.None:
+        //            MessageBox.Show("None");
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -120,9 +121,9 @@ namespace ATBM_Seminar.Views
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            Admin_Window admin = new Admin_Window(_admin.connection, _admin._role, _admin._user);
-            admin.Show();
+            //Admin_Window admin = new Admin_Window(_admin.connection, _admin._role, _admin._user);
             this.Close();
+            //admin.Show();
         }
         private void Button_Click_AddUser(object sender, RoutedEventArgs e)
         {
@@ -234,9 +235,10 @@ namespace ATBM_Seminar.Views
             ButtonChangePassword.Style = this.FindResource("isSelectButton") as Style;
             ButtonChangeRoleUser.Style = this.FindResource("menuButton") as Style;
             ButtonChangePrivsUser.Style = this.FindResource("menuButton") as Style;
-            ChangeRoleUserWindow.Visibility = Visibility.Hidden;
-            ChangePasswordUserWindow.Visibility = Visibility.Visible;
-            PrivilegeUser.Visibility = Visibility.Hidden;
+            //ChangeRoleUserWindow.Visibility = Visibility.Hidden;
+            //ChangePasswordUserWindow.Visibility = Visibility.Visible;
+            //PrivilegeUser.Visibility = Visibility.Hidden;
+            detailUserController.Content = new ChangePasswordUserUC(_admin, _userName);
         }
 
         private void ButtonChangePrivsUser_Click(object sender, RoutedEventArgs e)
@@ -245,11 +247,12 @@ namespace ATBM_Seminar.Views
             ButtonChangePassword.Style = this.FindResource("menuButton") as Style;
             ButtonChangeRoleUser.Style = this.FindResource("menuButton") as Style;
 
-            PrivilegeUser.Visibility = Visibility.Visible;
-            ChangePasswordUserWindow.Visibility = Visibility.Hidden;
-            ChangeRoleUserWindow.Visibility = Visibility.Hidden;
+            //PrivilegeUser.Visibility = Visibility.Visible;
+            //ChangePasswordUserWindow.Visibility = Visibility.Hidden;
+            //ChangeRoleUserWindow.Visibility = Visibility.Hidden;
 
             ShowPrivilegeOfUser();
+            detailUserController.Content = new PrivsOfUserUC(_admin, _userName);
         }
 
         private void ButtonChangeRoleUser_Click(object sender, RoutedEventArgs e)
@@ -257,11 +260,10 @@ namespace ATBM_Seminar.Views
             ButtonChangeRoleUser.Style = this.FindResource("isSelectButton") as Style;
             ButtonChangePassword.Style = this.FindResource("menuButton") as Style;
             ButtonChangePrivsUser.Style = this.FindResource("menuButton") as Style;
-            Loader();
-            ChangeRoleUserWindow.Visibility = Visibility.Visible;
-            ChangePasswordUserWindow.Visibility = Visibility.Hidden;
-            PrivilegeUser.Visibility = Visibility.Hidden;
-
+            //ChangeRoleUserWindow.Visibility = Visibility.Visible;
+            //ChangePasswordUserWindow.Visibility = Visibility.Hidden;
+            //PrivilegeUser.Visibility = Visibility.Hidden;
+            detailUserController.Content = new RolesOfUserUC(_admin, _userName);
         }
 
         private void membersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -286,8 +288,13 @@ namespace ATBM_Seminar.Views
         private void ButtonAddPrivsUser_Click(object sender, RoutedEventArgs e)
         {
             GrantPrivsUser window = new GrantPrivsUser(_admin, _userName);
-            window.Show();
             this.Close();
+            window.Show();
+        }
+
+        private void deleteroletBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

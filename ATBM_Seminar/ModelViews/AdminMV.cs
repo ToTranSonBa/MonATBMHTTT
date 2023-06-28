@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using Microsoft.SqlServer.Server;
 using System.Runtime.Remoting.Messaging;
 using ServerATBM.Controllers;
+using ATBM_Seminar.Views.RoleDetailView;
 
 namespace ATBM_Seminar.ModelViews
 {
@@ -41,6 +42,7 @@ namespace ATBM_Seminar.ModelViews
                 cmd.ExecuteNonQuery();
                 //connection.Close();
         }
+        #region user
         public ObservableCollection<Users> GetUserDataGrid()
         {
             ObservableCollection<Users> members = new ObservableCollection<Users>();
@@ -65,6 +67,176 @@ namespace ATBM_Seminar.ModelViews
             }
             return members;
         }
+        public bool executeSQL(string sql)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand(sql, connection);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public ObservableCollection<string> GetNewID()
+        {
+            ObservableCollection<string> list = new ObservableCollection<string>();
+            string SQLcontex = "select MANV from ATBMHTTT_TABLE_NHANVIEN where MANV NOT IN (SELECT USERNAME FROM ALL_USERS)";
+            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+            OracleDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(reader.GetString(reader.GetOrdinal("MANV")));
+            }
+            reader.Close();
+            return list;
+        }
+
+        public void AddNewUser(string userID, string password)
+        {
+            string SQLCreateUser = $"CREATE USER {userID} IDENTIFIED BY {password}";
+            OracleCommand cmdCreateUser = new OracleCommand(SQLCreateUser, connection);
+            cmdCreateUser.ExecuteNonQuery();
+
+            string SQLGrantSession = $"GRANT CREATE SESSION TO {userID}";
+            OracleCommand cmdGrantSession = new OracleCommand(SQLCreateUser, connection);
+            cmdGrantSession.ExecuteNonQuery();
+        }
+        public void DropUser(Users user)
+        {
+            string SQLcontex = $"Drop user {user.Name}";
+            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+            cmd.ExecuteNonQuery();
+        }
+        public void ChangePwdUser(string username, string pwd)
+        {
+            string SQLcontex = $"ALTER USER {username} IDENTIFIED BY {pwd}";
+            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+            cmd.ExecuteNonQuery();
+        }
+        public bool AddRoleForUser(string commandText)
+        {
+            //connect database with privilege sysdba
+            try
+            {
+                OracleCommand cmd = new OracleCommand(commandText, connection);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public List<string> GetUsers()
+        {
+            List<string> Users = new List<string>();
+            // Define and execute SQL
+            string commandText = $"select DISTINCT GRANTEE from dba_role_privs where grantee like 'NV%' ORDER BY GRANTEE";
+            OracleCommand cmd = new OracleCommand(commandText, connection);
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string user = reader.GetString(0);
+                    Users.Add(user);
+                }
+            }
+            return Users;
+        }
+
+        public List<RoleOfUserModel> GetRolesOfUser(string manv)
+        {
+            try
+            {
+                var list = new List<RoleOfUserModel>();
+                string SQLcontext = $"select * from dba_role_privs where grantee = '{manv}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new RoleOfUserModel
+                            {
+                                GRANTED_ROLE = reader.GetString(reader.GetOrdinal("GRANTED_ROLE")),
+                                ADMIN_OPTION = reader.GetString(reader.GetOrdinal("ADMIN_OPTION"))
+                            });
+                        }
+                    }
+                }
+                return list;
+            }
+            catch
+            {
+                return new List<RoleOfUserModel>();
+            }
+        }
+
+        public List<privileges> GetPrivilegesOfUser (string manv, int privkind)
+        {
+            try
+            {
+                string SQLcontext = "";
+                List<privileges> privs = new List<privileges>();
+                if (privkind == 0)
+                {
+                    SQLcontext = $"SELECT grantee, owner, table_name, privilege, grantor FROM dba_tab_privs where grantee in (select granted_role from DBA_role_privs where grantee = '{manv}')";
+                }
+                else
+                {
+                    SQLcontext = $"Select grantee, owner, table_name, privilege, grantor from dba_tab_privs where grantee = '{manv}'";
+                }
+                using(OracleCommand cmd = new OracleCommand( SQLcontext, connection))
+                {
+                    using(OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string grantee_tmp = reader.GetString(reader.GetOrdinal("GRANTEE"));
+                            string owner_tmp = reader.GetString(reader.GetOrdinal("OWNER"));
+                            string Table_name_tmp = reader.GetString(reader.GetOrdinal("TABLE_NAME"));
+                            string Grantor_tmp = reader.GetString(reader.GetOrdinal("GRANTOR"));
+                            string Privs_tmp = reader.GetString(reader.GetOrdinal("PRIVILEGE"));
+                            privs.Add(new privileges
+                            {
+                                grantee = grantee_tmp,
+                                owner = owner_tmp,
+                                Table_name = Table_name_tmp,
+                                Grantor = Grantor_tmp,
+                                Privs = Privs_tmp,
+                                GrantTable = Grantor_tmp
+                            });
+                        }
+
+                    }
+                }
+                return privs;
+            }
+            catch 
+            {
+                return new List<privileges>();
+            }
+        }
+        public bool RevokePrivsFromUser(privileges priv, string username)
+        {
+            try
+            {
+                string SQLcontex = $"Revoke {priv.Privs} on {priv.Table_name} from {username}";
+                OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region role
         public ObservableCollection<Roles_Window> GetRolesDataGrid()
         {
             ObservableCollection<Roles_Window> roles = new ObservableCollection<Roles_Window>();
@@ -99,37 +271,6 @@ namespace ATBM_Seminar.ModelViews
             OracleCommand cmd = new OracleCommand(SQLcontext, connection);
             cmd.ExecuteNonQuery();
         }
-        public ObservableCollection<string> GetNewID()
-        {
-            ObservableCollection<string> list = new ObservableCollection<string>();
-            string SQLcontex = "select MANV from A_NHANVIEN where MANV NOT IN (SELECT USERNAME FROM ALL_USERS)";
-            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
-            OracleDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                list.Add(reader.GetString(reader.GetOrdinal("MANV")));
-            }
-            reader.Close();
-            return list;
-        }
-        public void AddNewUser(string userID, string password)
-        {
-            string SQLCreateUser = $"CREATE USER {userID} IDENTIFIED BY {password}";
-            OracleCommand cmdCreateUser = new OracleCommand(SQLCreateUser, connection);
-            cmdCreateUser.ExecuteNonQuery();
-
-            string SQLGrantSession = $"GRANT CREATE SESSION TO {userID}";
-            OracleCommand cmdGrantSession = new OracleCommand(SQLCreateUser, connection);
-            cmdGrantSession.ExecuteNonQuery();
-        }
-
-        public void DropUser(Users user)
-        {
-            string SQLcontex = $"Drop user {user.Name}";
-            ObservableCollection<string> list = new ObservableCollection<string>();
-            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
-            cmd.ExecuteNonQuery();
-        }
         public void DropRole(Roles_Window role)
         {
             string SQLcontex = $"Drop Role {role.Name}";
@@ -137,19 +278,8 @@ namespace ATBM_Seminar.ModelViews
             OracleCommand cmd = new OracleCommand(SQLcontex, connection);
             cmd.ExecuteNonQuery();
         }
-        public void ChangePwdUser(string username, string pwd)
-        {
-            string SQLcontex = $"ALTER USER {username} IDENTIFIED BY {pwd}";
-            ObservableCollection<string> list = new ObservableCollection<string>();
-            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
-            cmd.ExecuteNonQuery();
-        }
-        public void AddRoleForUser(string commandText)
-        {
-                //connect database with privilege sysdba
-                OracleCommand cmd = new OracleCommand(commandText, connection);
-                cmd.ExecuteNonQuery();
-        }
+
+
         public List<string> Getrole()
         {
             List<string> roles = new List<string>();
@@ -157,7 +287,7 @@ namespace ATBM_Seminar.ModelViews
             // Define and execute SQL
             string commandText = $"select role from dba_roles where role like 'ATBMHTTT_ROLE%'";
             OracleCommand cmd = new OracleCommand(commandText, connection);
-            using(OracleDataReader reader = cmd.ExecuteReader())
+            using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
@@ -168,27 +298,186 @@ namespace ATBM_Seminar.ModelViews
             //connection.Close();
             return roles;
         }
-        public List<string> GetUsers()
-        {
-            List<string> Users = new List<string>();
-            // Define and execute SQL
-            string commandText = $"select DISTINCT GRANTEE from dba_role_privs where grantee like 'NV%' ORDER BY GRANTEE";
-            OracleCommand cmd = new OracleCommand(commandText, connection);
-            using (OracleDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string user = reader.GetString(0);
-                    Users.Add(user);
-                }
-            }
-            return Users;
-        }
-        public void DeleteRole(string SQLcontex) 
+
+        public void DeleteRole(string SQLcontex)
         {
             OracleCommand cmd = new OracleCommand(SQLcontex, connection);
             cmd.ExecuteNonQuery();
         }
+
+        public List<Users> GetUsersOfRole(string role)
+        {
+            try
+            {
+                var converter = new BrushConverter();
+                List<Users> user = new List<Users>();
+
+
+                string SQLcontext = $"select * from dba_role_privs where granted_role = 'ATBMHTTT_ROLE_{role}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            user.Add(new Users
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("GRANTEE")),
+                                admin_option = reader.GetString(reader.GetOrdinal("ADMIN_OPTION"))
+
+                            });
+                        }
+                    }
+                }
+                return user;
+            }
+            catch
+            {
+                return new List<Users>();
+            }
+        }
+        public List<privileges> GetPrivsOfRole(string role)
+        {
+            try
+            {
+                var converter = new BrushConverter();
+                List<privileges> Privs = new List<privileges>();
+
+
+                string SQLcontext = $"SELECT  * FROM DBA_tab_PRIVS  where grantee LIKE 'ATBMHTTT_ROLE_{role}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string grantee_tmp = reader.GetString(reader.GetOrdinal("GRANTEE"));
+                            string owner_tmp = reader.GetString(reader.GetOrdinal("OWNER"));
+                            string Table_name_tmp = reader.GetString(reader.GetOrdinal("TABLE_NAME"));
+                            string Grantor_tmp = reader.GetString(reader.GetOrdinal("GRANTOR"));
+                            string Privs_tmp = reader.GetString(reader.GetOrdinal("PRIVILEGE"));
+                            Privs.Add(new privileges
+                            {
+                                grantee = grantee_tmp,
+                                owner = owner_tmp,
+                                Table_name = Table_name_tmp,
+                                Grantor = Grantor_tmp,
+                                Privs = Privs_tmp,
+                                GrantTable = Grantor_tmp
+                            });
+                        }
+                    }
+                }
+                return Privs;
+            }
+            catch
+            {
+                return new List<privileges>();
+            }
+        }
+        public List<privileges> GetPrivsOnColumnOfRole(string role)
+        {
+            try
+            {
+                var converter = new BrushConverter();
+                List<privileges> Privs = new List<privileges>();
+
+
+                string SQLcontext = $"select * from DBA_COL_PRIVS where grantee LIKE 'ATBMHTTT_ROLE_{role}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string grantee_tmp = reader.GetString(reader.GetOrdinal("GRANTEE"));
+                            string owner_tmp = reader.GetString(reader.GetOrdinal("OWNER"));
+                            string Table_name_tmp = reader.GetString(reader.GetOrdinal("TABLE_NAME"));
+                            string Grantor_tmp = reader.GetString(reader.GetOrdinal("GRANTOR"));
+                            string Privs_tmp = reader.GetString(reader.GetOrdinal("PRIVILEGE"));
+                            string col = reader.GetString(reader.GetOrdinal("COLUMN_NAME"));
+                            Privs.Add(new privileges
+                            {
+                                grantee = grantee_tmp,
+                                owner = owner_tmp,
+                                Table_name = Table_name_tmp,
+                                Grantor = Grantor_tmp,
+                                Privs = Privs_tmp,
+                                GrantTable = Grantor_tmp,
+                                column = col
+                            });
+                        }
+                    }
+                }
+                return Privs;
+            }
+            catch
+            {
+                return new List<privileges>();
+            }
+        }
+        public bool RevokeUserFromRole(string role, string username)
+        {
+            try
+            {
+                string r = "ATBMHTTT_ROLE_" + role;
+                string SQLcontex = $"Revoke {r} from {username}";
+                OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool RevokePrivFromRole(string role, privileges privileges)
+        {
+            try
+            {
+                string r = "ATBMHTTT_ROLE_" + role;
+                string SQLcontex = $"Revoke {privileges.Privs} on {privileges.Table_name} from {r}";
+                OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public List<Users> GetUsersNotInRole(string role)
+        {
+            try
+            {
+                var converter = new BrushConverter();
+                List<Users> user = new List<Users>();
+
+
+                string SQLcontext = $"select * from ALL_USERS where USERNAME LIKE 'NV%' AND USERNAME NOT IN (SELECT GRANTEE FROM DBA_ROLE_PRIVS WHERE GRANTED_ROLE = '{role}')";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            user.Add(new Users
+                            {
+                                Name = reader.GetString(reader.GetOrdinal("USERNAME"))
+                            });
+                        }
+                    }
+                }
+                return user;
+            }
+            catch
+            {
+                return new List<Users>();
+            }
+        }
+        #endregion
+
+        #region table
         public ObservableCollection<Table> getTable()
         {
             ObservableCollection<Table> tables = new ObservableCollection<Table>();
@@ -211,7 +500,31 @@ namespace ATBM_Seminar.ModelViews
             }
             return tables;
         }
-
+        public List<string> getColOfTable(string tableName)
+        {
+            try
+            {
+                var  list = new List<string>();
+                string SQLcontext = $"SELECT column_name FROM all_tab_columns WHERE table_name = 'ATBMHTTT_TABLE_{tableName}'";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(reader.GetString(reader.GetOrdinal("COLUMN_NAME")));
+                        }
+                    }
+                }
+                return list;
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+        #endregion
+        #region auditing
         public List<Auditting_Class> GetAuditting_Classes(string policy_name) 
         {
             try
@@ -274,5 +587,6 @@ namespace ATBM_Seminar.ModelViews
                 return new List<Auditting_Class>();
             }
         }
+        #endregion
     }
 }

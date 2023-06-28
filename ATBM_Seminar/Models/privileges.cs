@@ -11,6 +11,7 @@ namespace ATBM_Seminar.Models
     {
         public string grantee { get; set; }
         public string owner { get; set; }
+        public string column { get; set; }
         public string Table_name { get; set; }
         public string Grantor { get; set; }
         public string Privs { get; set; }

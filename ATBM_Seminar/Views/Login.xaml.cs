@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,8 +64,8 @@ namespace ATBM_Seminar.Views
                 case "DBA":
                     {
                         Admin_Window admin_Window = new Admin_Window(conn, role, session.Username);
-                        admin_Window.Show();
                         this.Close();
+                        admin_Window.Show();
                         return;
                     }
                 default:
@@ -91,24 +92,34 @@ namespace ATBM_Seminar.Views
             {
                 cmd.ExecuteNonQuery();
             }
+            int countRole = 0;
             string sqlRoleOfUser = $"select ROLE from SESSION_ROLES";
             using (OracleCommand cmd = new OracleCommand(sqlRoleOfUser, conn))
             {
                 using (OracleDataReader reader = cmd.ExecuteReader())
                 {
-                    int countRole = 0;
+                    
                     while(reader.Read())
                     {
                         Lrole.Add(reader.GetString(reader.GetOrdinal("ROLE")));
                         countRole++;
                     }
-                    var role = Lrole.Where(hh => hh == "DBA"  || hh.Contains("ATBMHTTT_ROLE_")).ToList();
-                    if (countRole < 1)
-                    {
-                        MessageBox.Show("Account don't has privigle in system!");
-                        return;
-                    }
-                    else if (countRole == 1)
+                }
+                var role = Lrole.Where(hh => hh == "DBA" || hh.Contains("ATBMHTTT_ROLE_")).ToList();
+                if (countRole < 1)
+                {
+                    MessageBox.Show("Account don't has privigle in system!");
+                    return;
+                }
+                else if (countRole == 1)
+                {
+                    session.Username = user;
+                    session.Role = role[0];
+                    directWindowUser(conn, session);
+                }
+                else
+                {
+                    if (role.Where(hh => hh == "DBA").Count() == 1)
                     {
                         session.Username = user;
                         session.Role = role[0];
@@ -116,42 +127,33 @@ namespace ATBM_Seminar.Views
                     }
                     else
                     {
-                        if (role.Where(hh => hh == "DBA").Count() == 1)
+                        string vaitro = "";
+                        string getVaitro = "select sys_context('atbm_user_ctx', 'atbm_role') ROLE from dual";
+                        try
                         {
-                            session.Username = user;
-                            session.Role = role[0];
-                            directWindowUser(conn, session);
-                        }
-                        else
-                        {
-                            string vaitro = "";
-                            string getVaitro = "select sys_context('atbm_user_ctx', 'atbm_role') from dual";
-                            try
+                            using (OracleCommand cmd1 = new OracleCommand(getVaitro, conn))
                             {
-                                using (OracleCommand cmd1 = new OracleCommand(getVaitro, conn))
+                                using (OracleDataReader reader1 = cmd1.ExecuteReader())
                                 {
-                                    using (OracleDataReader reader1 = cmd1.ExecuteReader())
+                                    while (reader1.Read())
                                     {
-                                        while (reader1.Read())
-                                        {
-                                            vaitro = reader.GetString(reader.GetOrdinal("ROLE"));
-                                        }
+                                        vaitro = reader1.GetString(reader1.GetOrdinal("ROLE"));
                                     }
                                 }
-                                session.Username = user;
-                                session.Role = vaitro;
-                                directWindowUser(conn, session);
                             }
-                            catch
-                            {
-                                MessageBox.Show("Người dùng không có quyền hạn trong hệ thống. Vui lòng liên hệ quản trị viên để biết thêm.");
-                            }
-
+                            session.Username = user;
+                            session.Role = vaitro;
+                            directWindowUser(conn, session);
                         }
+                        catch
+                        {
+                            MessageBox.Show("Người dùng không có quyền hạn trong hệ thống. Vui lòng liên hệ quản trị viên để biết thêm.");
+                        }
+                        //var nextwindow = new MultiSession(conn, role, user);
+                        //this.Close();
+                        //nextwindow.Show();
                     }
-                }   
-            //}
-            //conn.Close();
+                }
             }
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)

@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ATBM_Seminar.Models;
 using ATBM_Seminar.ModelViews;
+using ATBM_Seminar.Views.TruongDeAn;
+using ATBM_Seminar.Views.TruongPhongView;
+using static System.Collections.Specialized.BitVector32;
+using System.Data;
 
 namespace ATBM_Seminar.Views
 {
@@ -35,25 +39,42 @@ namespace ATBM_Seminar.Views
             InitializeComponent();
             loaderSession();
         }
-        private void directWindowUser(string Role)
+        private void directWindowUser(string role)
         {
-            switch (Role)
+            switch (role)
             {
-                case "R_NHANVIEN":
+                case "ATBMHTTT_ROLE_NHANVIEN":
                     break;
-                case "R_TRUONGPHONG":
+                case "ATBMHTTT_ROLE_TRUONGPHONG":
+                    TruongPhongHome department = new TruongPhongHome(_connection, role, _user);
+                    this.Close();
+                    department.Show();
                     break;
-                case "R_GIAMDOC":
+                case "ATBMHTTT_ROLE_GIAMDOC":
+                    var giamdoc = new GiamDoc_Window(_connection);
+                    this.Close();
+                    giamdoc.Show();
+                    break;
+                case "ATBMHTTT_ROLE_QLTRUCTIEP":
+                    break;
+                case "ATBMHTTT_ROLE_TAICHINH":
+                    break;
+                case "ATBMHTTT_ROLE_NHANSU":
+                    break;
+                case "ATBMHTTT_ROLE_TRUONGDEAN":
+                    var trdean = new TruongDeAn_Window(_connection);
+                    this.Close();
+                    trdean.Show();
                     break;
                 case "DBA":
                     {
-                        Admin_Window admin_Window = new Admin_Window(_connection, Role, _user);
+                        Admin_Window admin_Window = new Admin_Window(_connection, role, _user);
                         admin_Window.Show();
                         this.Close();
                         return;
                     }
                 default:
-                    MessageBox.Show($"The application don't has role {_role}");
+                    MessageBox.Show($"The application don't has role {role}");
                     break;
             }
 
