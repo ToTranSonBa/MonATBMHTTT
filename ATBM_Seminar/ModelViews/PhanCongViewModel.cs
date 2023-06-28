@@ -20,5 +20,13 @@ namespace ATBM_Seminar.ViewModels
 
             return list_phancong;
         }
+        //
+        public ObservableCollection<PhanCong> phanCong_BL(OracleConnection connection)
+        {
+            ObservableCollection<PhanCong> list_phancong = new ObservableCollection<PhanCong>();
+            PhanCong phanCong = new PhanCong();
+            list_phancong = phanCong.getPhanCong_DB(connection);
+            return list_phancong;
+        }
     }
 }

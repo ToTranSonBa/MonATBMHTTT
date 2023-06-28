@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ATBM_Seminar.Models;
 using ATBM_Seminar.ModelViews;
+using ATBM_Seminar.Views.NhanVienView;
+using ATBM_Seminar.Views.TaiChinhView;
 using ATBM_Seminar.Views.TruongDeAn;
 using ATBM_Seminar.Views.TruongPhongView;
 using Oracle.ManagedDataAccess.Client;
@@ -39,6 +41,9 @@ namespace ATBM_Seminar.Views
             switch (role)
             {
                 case "ATBMHTTT_ROLE_NHANVIEN":
+                    NhanVienHome nhanVien = new NhanVienHome(conn, session.Username);
+                    this.Close();
+                    nhanVien.Show();
                     break;
                 case "ATBMHTTT_ROLE_TRUONGPHONG":
                     TruongPhongHome department = new TruongPhongHome(conn, role, session.Username);
@@ -53,6 +58,9 @@ namespace ATBM_Seminar.Views
                 case "ATBMHTTT_ROLE_QLTRUCTIEP":
                     break;
                 case "ATBMHTTT_ROLE_TAICHINH":
+                    FinancialStaffHome taiChinh = new FinancialStaffHome(conn, session.Username);
+                    this.Close();
+                    taiChinh.Show();
                     break;
                 case "ATBMHTTT_ROLE_NHANSU":
                     break;

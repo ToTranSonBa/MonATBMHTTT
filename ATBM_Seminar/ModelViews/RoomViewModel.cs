@@ -26,5 +26,13 @@ namespace ATBM_Seminar.ViewModels
 
             return rooms;
         }
+        // 
+        public ObservableCollection<Room> phongBan_BL(OracleConnection connection)
+        {
+            Room room = new Room();
+            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+            rooms = room.getPhongBan_DB(connection);
+            return rooms;
+        }
     }
 }

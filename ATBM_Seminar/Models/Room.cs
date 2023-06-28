@@ -99,5 +99,55 @@ namespace ATBM_Seminar.Models
             
             return room;
         }
+
+        //
+        public ObservableCollection<Room> getPhongBan_DB(OracleConnection connection)
+        {
+            ObservableCollection<Room> list_room = new ObservableCollection<Room>();
+
+
+            DataTable result = new DataTable();
+
+            string query = "SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_PHONGBAN";
+
+
+            OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
+            adapter.Fill(result);
+
+
+            for (int i = 0; i < result.Rows.Count; i++)
+            {
+                Room room = new Room();
+
+                DataRow row = result.Rows[i];
+                room.MAPB = row["MAPB"].ToString();
+                room.TENPB = row["TENPB"].ToString();
+                room.MATRPHG = row["TRPHG"].ToString();
+                list_room.Add(room);
+            }
+
+            return list_room;
+        }
+
+        public Room getOnePhongBan_DB(OracleConnection connection, string MaPB)
+        {
+            Room room = null;
+            string query = $"SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_PHONGBAN WHERE MAPB = '{MaPB}' ";
+
+            OracleCommand cmd = new OracleCommand(query, connection);
+
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read()) // Kiểm tra xem có dữ liệu trả về hay không
+                {
+                    room = new Room();
+
+                    room.MAPB = reader.GetString(0);
+                    room.TENPB = reader.GetString(1);
+                    room.MATRPHG = reader.GetString(2);
+                }
+            }
+            return room;
+        }
     }
 }

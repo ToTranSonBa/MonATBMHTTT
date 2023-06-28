@@ -305,6 +305,21 @@
     <Compile Include="Views\MultiSession.xaml.cs">
       <DependentUpon>MultiSession.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NhanVienView\AssignmentUC.xaml.cs">
+      <DependentUpon>AssignmentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanVienView\DepartmentUC.xaml.cs">
+      <DependentUpon>DepartmentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanVienView\NhanVienHome.xaml.cs">
+      <DependentUpon>NhanVienHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanVienView\PersonelUC.xaml.cs">
+      <DependentUpon>PersonelUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanVienView\ProjectUC.xaml.cs">
+      <DependentUpon>ProjectUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoleDetailView\GrantPrivsToRole.xaml.cs">
       <DependentUpon>GrantPrivsToRole.xaml</DependentUpon>
     </Compile>
@@ -331,6 +346,21 @@
     </Compile>
     <Compile Include="Views\TableController.xaml.cs">
       <DependentUpon>TableController.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaiChinhView\EmployeeDetailsInf.xaml.cs">
+      <DependentUpon>EmployeeDetailsInf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaiChinhView\FinanAssignmentUC.xaml.cs">
+      <DependentUpon>FinanAssignmentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaiChinhView\FinancialStaffHome.xaml.cs">
+      <DependentUpon>FinancialStaffHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaiChinhView\FinanEmployeesUC.xaml.cs">
+      <DependentUpon>FinanEmployeesUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaiChinhView\FinanPersonelUC.xaml.cs">
+      <DependentUpon>FinanPersonelUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TruongDeAn\ADDDeAn.xaml.cs">
       <DependentUpon>ADDDeAn.xaml</DependentUpon>
@@ -444,6 +474,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NhanVienView\AssignmentUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanVienView\DepartmentUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanVienView\NhanVienHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanVienView\PersonelUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanVienView\ProjectUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RoleDetailView\GrantPrivsToRole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -479,6 +529,26 @@
     <Page Include="Views\TableController.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TaiChinhView\EmployeeDetailsInf.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TaiChinhView\FinanAssignmentUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TaiChinhView\FinancialStaffHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TaiChinhView\FinanEmployeesUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TaiChinhView\FinanPersonelUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TruongDeAn\ADDDeAn.xaml">
       <Generator>MSBuild:Compile</Generator>

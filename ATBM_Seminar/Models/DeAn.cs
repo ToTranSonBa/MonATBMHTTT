@@ -144,5 +144,60 @@ namespace ATBM_Seminar.Models
                 OracleDataReader reader = cmd.ExecuteReader();
             
         }
+
+        // get all dean by select table
+        public ObservableCollection<DeAn> getDeAn_DB(OracleConnection connection)
+        {
+            ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
+
+
+            DataTable result = new DataTable();
+
+            string query = "SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_DEAN";
+
+
+            OracleDataAdapter adapter = new OracleDataAdapter(query, connection);
+            adapter.Fill(result);
+
+
+            for (int i = 0; i < result.Rows.Count; i++)
+            {
+                DeAn dean = new DeAn();
+                Room room = new Room();
+
+                DataRow row = result.Rows[i];
+                dean.MADA = row["MADA"].ToString();
+                dean.TENDA = row["TENDA"].ToString();
+                dean.NGAYBD = row["NGAYBD"].ToString();
+                room = room.getOnePhongBan_DB(connection, row["PHONG"].ToString());
+                dean.PHONG = room.TENPB;
+                list_dean.Add(dean);
+            }
+
+            return list_dean;
+        }
+
+        // get one dean
+        public DeAn getOneDeAn_DB(OracleConnection connection, string MADA)
+        {
+            DeAn dean = null;
+
+            string query = $"SELECT * FROM ATBM_20H3T_22.ATBMHTTT_TABLE_DEAN WHERE MADA = '{MADA}' ";
+
+            OracleCommand cmd = new OracleCommand(query, connection);
+
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read()) // Kiểm tra xem có dữ liệu trả về hay không
+                {
+                    dean = new DeAn();
+                    dean.MADA = reader.GetString(0);
+                    dean.TENDA = reader.GetString(1);
+                    dean.NGAYBD = reader.GetString(2);
+                    dean.PHONG = reader.GetString(3);
+                }
+            }
+            return dean;
+        }
     }
 }
