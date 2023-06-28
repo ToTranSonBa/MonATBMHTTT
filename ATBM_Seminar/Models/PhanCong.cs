@@ -82,5 +82,38 @@ namespace ATBM_Seminar.Models
             }
             return list_phancong;
         }
+
+        #region CUong
+        public ObservableCollection<PhanCong> allPC(string MaNV, OracleConnection conn)
+        {
+            ObservableCollection<PhanCong> list_pc = new ObservableCollection<PhanCong>();
+
+            OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_GetPhanCong", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            OracleParameter cursorParam = cmd.Parameters.Add("EMPLOYCURSOR", OracleDbType.RefCursor);
+            cursorParam.Direction = ParameterDirection.Output;
+
+            OracleParameter inputParam = new OracleParameter("MANV", OracleDbType.Char);
+            inputParam.Value = MaNV;
+            cmd.Parameters.Add(inputParam);
+
+
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    PhanCong pc = new PhanCong();
+                    pc.TENNV = reader["TENNV"].ToString();
+                    pc.TENDA = reader["TENDA"].ToString();
+                    pc.THOIGIAN = reader["THOIGIAN"].ToString();
+                    list_pc.Add(pc);
+                }
+            }
+
+
+            return list_pc;
+        }
+        #endregion
     }
 }

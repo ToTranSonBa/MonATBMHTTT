@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ATBM_Seminar"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             StartupUri="Views/Login.xaml"
+             StartupUri="Views/QuanLyViews/QuanlyHome.xaml"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
         <Style x:Key="topButton" TargetType="Button">

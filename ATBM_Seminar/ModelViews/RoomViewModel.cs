@@ -34,5 +34,23 @@ namespace ATBM_Seminar.ViewModels
             rooms = room.getPhongBan_DB(connection);
             return rooms;
         }
+
+        #region cuong
+        public ObservableCollection<Room> showRoom1(OracleConnection connection)
+        {
+            Room room = new Room();
+            ObservableCollection<Room> rooms = new ObservableCollection<Room>();
+            rooms = room.allRoom(connection);
+
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                Employee employee = new Employee();
+                employee = employee.detailEmployee(rooms[i].MATRPHG, connection);
+                rooms[i].TRPHG = employee.TENNV;
+            }
+
+            return rooms;
+        }
+        #endregion
     }
 }

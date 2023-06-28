@@ -28,5 +28,12 @@ namespace ATBM_Seminar.ViewModels
             list_phancong = phanCong.getPhanCong_DB(connection);
             return list_phancong;
         }
+        public ObservableCollection<PhanCong> show_allPC(string MaNV, OracleConnection conn)
+        {
+            PhanCong pc = new PhanCong();
+            ObservableCollection<PhanCong> list_pc = new ObservableCollection<PhanCong>();
+            list_pc = pc.allPC(MaNV, conn);
+            return list_pc;
+        }
     }
 }

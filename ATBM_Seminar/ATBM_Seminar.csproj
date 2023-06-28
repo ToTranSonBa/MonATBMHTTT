@@ -320,6 +320,12 @@
     <Compile Include="Views\NhanVienView\ProjectUC.xaml.cs">
       <DependentUpon>ProjectUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\QuanLyViews\QuanlyHome.xaml.cs">
+      <DependentUpon>QuanlyHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuanLyViews\QLTrucTiep_Window.xaml.cs">
+      <DependentUpon>QLTrucTiep_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoleDetailView\GrantPrivsToRole.xaml.cs">
       <DependentUpon>GrantPrivsToRole.xaml</DependentUpon>
     </Compile>
@@ -491,6 +497,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NhanVienView\ProjectUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\QuanLyViews\QuanlyHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\QuanLyViews\QLTrucTiep_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
