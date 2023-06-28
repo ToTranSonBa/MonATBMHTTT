@@ -18,8 +18,8 @@ namespace ATBM_Seminar.Models
         public string NGAYSINH { get; set; }
         public string DIACHI { get; set; }
         public string SODT { get; set; }
-        public decimal LUONG { get; set; }
-        public decimal PHUCAP { get; set; }
+        public string LUONG { get; set; }
+        public string PHUCAP { get; set; }
         public string VAITRO { get; set; }
         public string MANQL { get; set; }
         public string PHG { get; set; }
@@ -45,8 +45,8 @@ namespace ATBM_Seminar.Models
                     employee.NGAYSINH = row["NGAYSINH"].ToString();
                     employee.DIACHI = row["DIACHI"].ToString();
                     employee.SODT = row["SODT"].ToString();
-                    employee.LUONG = Convert.ToInt32(row["LUONG"]);
-                    employee.PHUCAP = Convert.ToInt32(row["PHUCAP"]);
+                    employee.LUONG = (row["LUONG"]).ToString();
+                    employee.PHUCAP = (row["PHUCAP"]).ToString();
                     employee.VAITRO = row["VAITRO"].ToString();
                     employee.MANQL = row["MANQL"].ToString();
                     employee.PHG = row["PHG"].ToString();
@@ -81,8 +81,8 @@ namespace ATBM_Seminar.Models
                         employee.NGAYSINH = reader.GetString(3);
                         employee.DIACHI = reader.GetString(4);
                         employee.SODT = reader.GetString(5);
-                        employee.LUONG = reader.GetDecimal(6); ;
-                        employee.PHUCAP = reader.GetDecimal(7);
+                        //employee.LUONG = reader.GetString(6);
+                        //employee.PHUCAP = reader.GetString(7);
                         employee.VAITRO = reader.GetString(8);
                         if (!reader.IsDBNull(9))
                         {
