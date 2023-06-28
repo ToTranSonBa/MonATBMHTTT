@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ATBM_Seminar.Views.NhanVienView.ProjectUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ATBM_Seminar.Views.NhanVienView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#EFF2F7">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Width="800">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="90,0,0,0">
+                <Border Margin="0 3 10 3"  BorderBrush="Black" BorderThickness="2" CornerRadius="10" Width="300">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition Width="35"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Background="#EFF2F7" x:Name="SearchTextBox" Margin="20 0 0 0" MinWidth="200" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" CaretBrush="White" SelectionBrush="White"
+                             HorizontalContentAlignment="Left" VerticalContentAlignment="Center" BorderBrush="{x:Null}" TextChanged="SearchTextBox_TextChanged"/>
+                        <Button Click="Search_Click" Height="29" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" HorizontalContentAlignment="Center"
+                         ToolTip="Resource name: MaterialDesignRaisedButton" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0">
+                            <materialDesign:PackIcon Foreground="Black" Kind="Magnify" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Border Background="#EFF2F7" Grid.Row="1" Width="750" Height="380" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+            <DataGrid AutoGenerateColumns="False" 
+                CanUserAddRows="False" x:Name="DeAnDataGrid"
+                HeadersVisibility="All" SelectionChanged="equipmentListView_SelectionChanged">
+                <DataGrid.Columns >
+
+                    <DataGridTextColumn Width="130" Binding="{Binding MADA}" Header="Mã đề án" />
+                    <DataGridTextColumn Width="200" Header="Tên đề án" Binding="{Binding TENDA}"/>
+                    <DataGridTextColumn Width="180" Header="Ngày bắt đầu" Binding="{Binding NGAYBD}"/>
+                    <DataGridTextColumn Width="150" Header="Phòng" Binding="{Binding PHONG}"/>
+
+                    <DataGridTemplateColumn  Header="Chi tiết">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button>
+                                    <materialDesign:PackIcon Kind="Details" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn >
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

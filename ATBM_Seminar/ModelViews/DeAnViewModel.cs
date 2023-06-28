@@ -21,5 +21,15 @@ namespace ATBM_Seminar.ViewModels
 
             return list_dean;
         }
+
+        //
+        public ObservableCollection<DeAn> deAn_BL(OracleConnection connection)
+        {
+            DeAn dean = new DeAn();
+            ObservableCollection<DeAn> list_dean = new ObservableCollection<DeAn>();
+            list_dean = dean.getDeAn_DB(connection);
+
+            return list_dean;
+        }
     }
 }
