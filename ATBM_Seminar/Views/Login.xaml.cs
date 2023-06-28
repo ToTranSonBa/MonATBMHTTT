@@ -17,7 +17,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ATBM_Seminar.Models;
 using ATBM_Seminar.ModelViews;
+using ATBM_Seminar.Views.NhanSuViews;
 using ATBM_Seminar.Views.NhanVienView;
+using ATBM_Seminar.Views.QuanLyViews;
 using ATBM_Seminar.Views.TaiChinhView;
 using ATBM_Seminar.Views.TruongDeAn;
 using ATBM_Seminar.Views.TruongPhongView;
@@ -56,6 +58,9 @@ namespace ATBM_Seminar.Views
                     giamdoc.Show();
                     break;
                 case "ATBMHTTT_ROLE_QLTRUCTIEP":
+                    var qltructiep = new QuanlyHome(conn);
+                    this.Close();
+                    qltructiep.Show();
                     break;
                 case "ATBMHTTT_ROLE_TAICHINH":
                     FinancialStaffHome taiChinh = new FinancialStaffHome(conn, session.Username);
@@ -63,6 +68,9 @@ namespace ATBM_Seminar.Views
                     taiChinh.Show();
                     break;
                 case "ATBMHTTT_ROLE_NHANSU":
+                    var nhansu = new NhanSuWindow(conn, session.Username);
+                    this.Close();
+                    nhansu.Show();
                     break;
                 case "ATBMHTTT_ROLE_TRUONGDEAN":
                     var trdean = new TruongDeAn_Window(conn);

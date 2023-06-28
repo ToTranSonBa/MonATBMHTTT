@@ -96,7 +96,7 @@ namespace ATBM_Seminar.Views.QuanLyViews
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            var admin = new QuanlyHome();
+            var admin = new QuanlyHome(_oracleConnection);
             admin.Show();
             this.Close();
         }

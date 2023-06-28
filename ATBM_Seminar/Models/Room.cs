@@ -149,5 +149,81 @@ namespace ATBM_Seminar.Models
             }
             return room;
         }
+
+        #region cuong tao lao 2
+        public ObservableCollection<Room> allRoom2(OracleConnection conn)
+        {
+            ObservableCollection<Room> list_room = new ObservableCollection<Room>();
+            DataTable result = new DataTable();
+            string query = "SELECT * FROM ATBM_20H3T_22.v_ShowAllPhongBan";
+
+            OracleDataAdapter adapter = new OracleDataAdapter(query, conn);
+            adapter.Fill(result);
+
+
+            for (int i = 0; i < result.Rows.Count; i++)
+            {
+                Room room = new Room();
+                Employee employee = new Employee();
+                DataRow row = result.Rows[i];
+                room.MAPB = row["MAPB"].ToString();
+                room.TENPB = row["TENPB"].ToString();
+                room.MATRPHG = row["TRPHG"].ToString();
+                employee = employee.detailEmployee(row["TRPHG"].ToString(), conn);
+                room.TRPHG = employee.TENNV;
+                list_room.Add(room);
+            }
+
+            return list_room;
+
+        }
+
+        public void Update(OracleConnection connection, string TP, string TrP, string MP)
+        {
+            OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_UPDATEROOM", connection);
+            cmd.CommandType = CommandType.StoredProcedure; ;
+
+            OracleParameter inputParam2 = new OracleParameter("TP", OracleDbType.NVarchar2);
+            inputParam2.Value = TP;
+            cmd.Parameters.Add(inputParam2);
+
+            OracleParameter inputParam3 = new OracleParameter("TrP", OracleDbType.Char);
+            inputParam3.Value = TrP;
+            cmd.Parameters.Add(inputParam3);
+
+            OracleParameter inputParam4 = new OracleParameter("MP", OracleDbType.Char);
+            inputParam4.Value = MP;
+            cmd.Parameters.Add(inputParam4);
+
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+
+            }
+        }
+
+        public void Insert(OracleConnection connection, string TP, string TrP, string MP)
+        {
+            OracleCommand cmd = new OracleCommand("ATBM_20H3T_22.sp_INSERTROOM", connection);
+            cmd.CommandType = CommandType.StoredProcedure; ;
+
+            OracleParameter inputParam2 = new OracleParameter("TP", OracleDbType.NVarchar2);
+            inputParam2.Value = TP;
+            cmd.Parameters.Add(inputParam2);
+
+            OracleParameter inputParam3 = new OracleParameter("TrP", OracleDbType.Char);
+            inputParam3.Value = TrP;
+            cmd.Parameters.Add(inputParam3);
+
+            OracleParameter inputParam4 = new OracleParameter("MP", OracleDbType.Char);
+            inputParam4.Value = MP;
+            cmd.Parameters.Add(inputParam4);
+
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+
+            }
+
+        }
+        #endregion
     }
 }

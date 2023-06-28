@@ -305,6 +305,18 @@
     <Compile Include="Views\MultiSession.xaml.cs">
       <DependentUpon>MultiSession.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NhanSuViews\AddEmployee.xaml.cs">
+      <DependentUpon>AddEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanSuViews\AddRoom.xaml.cs">
+      <DependentUpon>AddRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanSuViews\detailEmployeeWindow.xaml.cs">
+      <DependentUpon>detailEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NhanSuViews\NhanSuWindow.xaml.cs">
+      <DependentUpon>NhanSuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NhanVienView\AssignmentUC.xaml.cs">
       <DependentUpon>AssignmentUC.xaml</DependentUpon>
     </Compile>
@@ -479,6 +491,22 @@
     <Page Include="Views\MultiSession.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NhanSuViews\AddEmployee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanSuViews\AddRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanSuViews\detailEmployeeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NhanSuViews\NhanSuWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NhanVienView\AssignmentUC.xaml">
       <Generator>MSBuild:Compile</Generator>

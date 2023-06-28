@@ -30,12 +30,10 @@ namespace ATBM_Seminar.Views.QuanLyViews
     public partial class QuanlyHome : Window
     {
         private readonly OracleConnection _oracleConnection;
-        public QuanlyHome()
+        public QuanlyHome(OracleConnection oracleConnection)
         {
-            string username = "NV007";
-            string password = "1";
-            ConnectionDB conn = new ConnectionDB();
-            _oracleConnection= conn.OracleConnection(username, password);
+            _oracleConnection = oracleConnection;
+            
             InitializeComponent();
             QuanLyButton_Click(null,null);
 
@@ -95,7 +93,10 @@ namespace ATBM_Seminar.Views.QuanLyViews
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
+            _oracleConnection.Close();
+            var login = new Login();
             this.Close();
+            login.Show();
         }
 
         private void buttonEditQLclick(object sender, RoutedEventArgs e)
