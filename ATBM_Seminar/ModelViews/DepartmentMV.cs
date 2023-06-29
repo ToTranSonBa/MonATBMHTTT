@@ -22,12 +22,12 @@ namespace ATBM_Seminar.ModelViews
             _role = Role;
         }
 
-        public void startQuery()
-        {
-            string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
-            OracleCommand cmd = new OracleCommand(SQLcontex, connection);
-            cmd.ExecuteNonQuery();
-        }
+        //public void startQuery()
+        //{
+        //    string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
+        //    OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+        //    cmd.ExecuteNonQuery();
+        //}
         public List<DeAn_Class> getDean() { 
             try
             {
@@ -142,7 +142,7 @@ namespace ATBM_Seminar.ModelViews
             try
             {
                 List<NHANVIEN> list = new List<NHANVIEN>();
-                string SQLcontext = $"SELECT MANV, tennv, phai, ngaysinh, diachi, sodt, vaitro, PHG, atbm_20h3t_22.decryto_function(LUONG, MANV) LUONG, atbm_20h3t_22.decryto_function(PHUCAP, MANV) PHUCAP FROM  atbm_20h3t_22.ATBMHTTT_TABLE_NHANVIEN";
+                string SQLcontext = $"SELECT * FROM ATBM_20H3T_22.VIEW_CANHAN_TRUONGPHONG";
                 using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
                 {
                     using (OracleDataReader reader = cmd.ExecuteReader())

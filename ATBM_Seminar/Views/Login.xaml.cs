@@ -103,11 +103,11 @@ namespace ATBM_Seminar.Views
             //using (conn)
             //{
                 //conn.Open();
-            string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
-            using (OracleCommand cmd = new OracleCommand(SQLcontex, conn))
-            {
-                cmd.ExecuteNonQuery();
-            }
+            //string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
+            //using (OracleCommand cmd = new OracleCommand(SQLcontex, conn))
+            //{
+            //    cmd.ExecuteNonQuery();
+            //}
             int countRole = 0;
             string sqlRoleOfUser = $"select ROLE from SESSION_ROLES";
             using (OracleCommand cmd = new OracleCommand(sqlRoleOfUser, conn))

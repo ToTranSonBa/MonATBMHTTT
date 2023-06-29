@@ -36,10 +36,10 @@ namespace ATBM_Seminar.ModelViews
         public void startQuery()
         {
                 //connection.Open();
-                string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
-                ObservableCollection<string> list = new ObservableCollection<string>();
-                OracleCommand cmd = new OracleCommand(SQLcontex, connection);
-                cmd.ExecuteNonQuery();
+                //string SQLcontex = $"alter session set \"_ORACLE_SCRIPT\"=true";
+                //ObservableCollection<string> list = new ObservableCollection<string>();
+                //OracleCommand cmd = new OracleCommand(SQLcontex, connection);
+                //cmd.ExecuteNonQuery();
                 //connection.Close();
         }
         #region user
@@ -498,7 +498,6 @@ namespace ATBM_Seminar.ModelViews
             }
         }
         #endregion
-
         #region table
         public ObservableCollection<Table> getTable()
         {
@@ -626,7 +625,7 @@ namespace ATBM_Seminar.ModelViews
                             list.Add(new View
                             {
                                 Name = reader.GetString(reader.GetOrdinal("VIEW_NAME")),
-                                Text = reader.GetString(reader.GetOrdinal("TEXT")),
+                                //Text = reader.GetString(reader.GetOrdinal("TEXT")),
                                 Length = reader.GetString(reader.GetOrdinal("TEXT_LENGTH"))
                             });
                         }

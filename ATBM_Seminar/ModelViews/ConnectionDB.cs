@@ -15,7 +15,7 @@ namespace ATBM_Seminar.ModelViews
             try
             {
                 string conString = $"User Id={username};Password={password};" +
-                "Data Source=localhost:1521/xe;";
+                "Data Source=localhost:1521/DATABASE_ATBM_20H3T_22;";
                 if (username == "sys" || username == "SYS") { conString += "DBA PRIVILEGE=SYSDBA;"; }
                 OracleConnection con = new OracleConnection(conString);
                 con.Open();
