@@ -32,7 +32,7 @@ namespace ATBM_Seminar.Views
 
         private void addNewRole(object sender, RoutedEventArgs e)
         {
-            string text = "ATBMHTTT_ROLE_" + txtAddRole.Text;
+            string text = txtAddRole.Text;
             try
             {
                 _admin.CreateRole(text);

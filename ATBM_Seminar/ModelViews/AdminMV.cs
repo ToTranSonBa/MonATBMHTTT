@@ -101,7 +101,7 @@ namespace ATBM_Seminar.ModelViews
             cmdCreateUser.ExecuteNonQuery();
 
             string SQLGrantSession = $"GRANT CREATE SESSION TO {userID}";
-            OracleCommand cmdGrantSession = new OracleCommand(SQLCreateUser, connection);
+            OracleCommand cmdGrantSession = new OracleCommand(SQLGrantSession, connection);
             cmdGrantSession.ExecuteNonQuery();
         }
         public void DropUser(Users user)
@@ -234,6 +234,29 @@ namespace ATBM_Seminar.ModelViews
                 return false;
             }
         }
+        public List<string> getUserNotAccount()
+        {
+            try
+            {
+                var list = new List<string>();
+                string SQLcontext = $"select MANV from ATBM_20H3T_22.ATBMHTTT_TABLE_NHANVIEN WHERE MANV NOT IN (SELECT USERNAME FROM ALL_USERS)";
+                using (OracleCommand cmd = new OracleCommand(SQLcontext, connection))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(reader.GetString(reader.GetOrdinal("MANV")));
+                        }
+                    }
+                }
+                return list;
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
         #endregion
 
         #region role
@@ -273,8 +296,7 @@ namespace ATBM_Seminar.ModelViews
         }
         public void DropRole(Roles_Window role)
         {
-            string SQLcontex = $"Drop Role {role.Name}";
-            ObservableCollection<string> list = new ObservableCollection<string>();
+            string SQLcontex = $"Drop Role ATBMHTTT_ROLE_{role.Name}";
             OracleCommand cmd = new OracleCommand(SQLcontex, connection);
             cmd.ExecuteNonQuery();
         }

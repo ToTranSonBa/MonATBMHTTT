@@ -50,7 +50,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="View Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Text Length"  Binding="{Binding Length}"/>
-                <DataGridTextColumn Header="Text"  Binding="{Binding Text}"/>
+                <!--<DataGridTextColumn Header="Text"  Binding="{Binding Text}"/>-->
             </DataGrid.Columns>
         </DataGrid>
 

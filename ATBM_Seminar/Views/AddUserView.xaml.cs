@@ -28,6 +28,7 @@ namespace ATBM_Seminar.Views
             _admin = admin;
             _userControl = userControl;
             InitializeComponent();
+            comboboxAddUser.ItemsSource = _admin.getUserNotAccount();
         }
 
         private void addNewUser(object sender, RoutedEventArgs e)

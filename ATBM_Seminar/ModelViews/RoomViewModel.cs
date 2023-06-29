@@ -59,7 +59,7 @@ namespace ATBM_Seminar.ViewModels
         {
             Room room = new Room();
             ObservableCollection<Room> list_Room = new ObservableCollection<Room>();
-            list_Room = room.allRoom(conn);
+            list_Room = room.allRoom2(conn);
 
             return list_Room;
         }

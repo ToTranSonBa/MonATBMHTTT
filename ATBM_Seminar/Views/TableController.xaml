@@ -62,7 +62,6 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Owner" Binding="{Binding Owner}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Created_Day" Binding="{Binding }" IsReadOnly="True" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -174,7 +174,7 @@
 
                         <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding TENNV}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Tên đề án" Binding="{Binding TENDA}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Thời gian" Binding="{Binding TIME}"  IsReadOnly="True" Width="150"/>
+                        <DataGridTextColumn Header="Thời gian" Binding="{Binding THOIGIAN}"  IsReadOnly="True" Width="150"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
